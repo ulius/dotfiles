@@ -1,0 +1,19 @@
+[user]
+	name = Ulrich Werner
+	email = ulrichwern@gmail.com
+
+[alias]
+log1=log --pretty=oneline
+glg=log --pretty=oneline --graph --abbrev-commit
+loggraph = log --graph --all --full-history --color --branches --decorate
+awe=log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+[core]
+    pager=less -FRSX
+    editor=vim
+
+[color]
+    ui=auto
+
+[merge]
+    tool=vimdiff
+

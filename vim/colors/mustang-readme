@@ -1,0 +1,4 @@
+in order for mustang to work, add this to .vimrc:
+set t_Co=256
+colorscheme mustang
+
