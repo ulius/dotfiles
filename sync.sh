@@ -40,11 +40,14 @@ git submodule update --init
 cd $dir
 # set nomore lets vim quit out after sourcing the vimball
 vim -c 'set nomore' -c 'so %'  -c 'q!' $dir/vim/vimball/command-t/command-t-1.3.1.vba
-
+# make the c extension so command-t works + is faster
 cd ~/.vim/ruby/command-t 
 ruby extconf.rb 
 make 
 cd $dir
 
-echo "Enjoy your new and improved VIM!"
+echo ""
+echo "+==================================+"
+echo "| Enjoy your new and improved VIM! |"
+echo "+==================================+"
 
