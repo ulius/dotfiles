@@ -6,7 +6,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
-export PATH=$PATH:/var/www/html/health/Symfony/app:/usr/local/bin/
+export PATH=$PATH:/var/www/html/health/Symfony/app:/usr/local/bin/:/usr/bin
 export NODE_PATH=$NODE_PATH:/usr/local/src/doctorjs/lib/jsctags:
 export EDITOR=vim
 export LANG=.en_US. # so pstree displays correctly

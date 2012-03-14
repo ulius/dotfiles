@@ -74,14 +74,8 @@ au BufNewFile,BufRead *.twig set filetype=jinja
 " Checks current file for php parser errors
 noremap <C-L> :!php -l %<CR>
 
-" Taken from Gary Bernhardt's Destroy All Software screencast 'File Navigation in Vim'
-" %% will show /path/to/current/dir/
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
 
 
-runtime macros/matchit.vim
 set scrolloff=10
 
 " so javascript indents after return
