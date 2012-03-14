@@ -12,7 +12,7 @@ export EDITOR=vim
 export LANG=.en_US. # so pstree displays correctly
 
 # git autocomplete on bash
-source ~/.git-completion.bash
+source ~/dotfiles/git-completion.bash
 
 cd /var/www/html/health/Symfony/src/Health/TrackBundle/
 
