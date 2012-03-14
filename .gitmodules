@@ -40,3 +40,6 @@
 [submodule "vim/bundle/vim-togglemouse"]
 	path = vim/bundle/vim-togglemouse
 	url = http://github.com/nvie/vim-togglemouse.git
+[submodule "vim/bundle/scratch"]
+	path = vim/bundle/scratch
+	url = http://github.com/vim-scripts/scratch.vim.git

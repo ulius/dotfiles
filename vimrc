@@ -40,7 +40,8 @@ set cursorline
 " highlight searches
 set hlsearch
 
-map <F2> :NERDTreeToggle<CR>
+map <F1> :NERDTreeFind <CR>
+map <F2> :NERDTreeToggle getcwd() <CR>
 
 
 "tabs
@@ -136,7 +137,7 @@ nnoremap <leader>d zd
 nmap  <leader>ev :vs $MYVIMRC<CR>
 nmap  <leader>sv :so $MYVIMRC<CR>
 
-" http://stackoverflow.com/questions/526858/how-do-i-make-vim-do-normal-bash-like-tab-completion-for-file-names
+" http://stackoverflow.com/q/526858
 set wildmode=longest,list,full
 set wildmenu
 
@@ -178,5 +179,37 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-" escape is pretty far away
+" remap <esc> to kj    
 imap kj <ESC>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>gr :topleft :split Resources/config/routing.yml<cr>
+function! ShowRoutes()
+  " Requires 'scratch' plugin
+  :topleft 50 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! console router:debug --env=prod
+  " Size window to number of lines (1 plus rake output length)
+  :execute ":normal " . line("$") . "_ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+map <leader>gR :call ShowRoutes()<cr>
+map <leader>gv :CommandTFlush<cr>\|:CommandT Resources/views<cr>
+map <leader>gc :CommandTFlush<cr>\|:CommandT Controllers<cr>
+map <leader>ge :CommandTFlush<cr>\|:CommandT Entity<cr>
+map <leader>gj :CommandTFlush<cr>\|:CommandT Resources/public/js<cr>
+map <leader>gs :CommandTFlush<cr>\|:CommandT Resources/public/css<cr>
+map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
+map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+"map <leader>gg :topleft 100 :split Gemfile<cr>
+
