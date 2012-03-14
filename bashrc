@@ -14,8 +14,5 @@ export LANG=.en_US. # so pstree displays correctly
 # git autocomplete on bash
 source ~/.git-completion.bash
 
-#
-source ~/bin/z/z.sh
-
 cd /var/www/html/health/Symfony/src/Health/TrackBundle/
 
