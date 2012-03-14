@@ -1,3 +1,5 @@
 vim/view
 vim/ruby
 vim/.VimballRecord
+*.swp
+*.swo
