@@ -1,5 +1,6 @@
 vim/view
 vim/ruby
 vim/.VimballRecord
+vim/plugin/command-t.vim
 *.swp
 *.swo
