@@ -5,3 +5,4 @@ vim/plugin/command-t.vim
 vim/doc/command-t.txt
 *.swp
 *.swo
+vim/.netrwhist

@@ -46,3 +46,8 @@
 [submodule "vim/bundle/matchit"]
 	path = vim/bundle/matchit
 	url = http://github.com/tsaleh/vim-matchit.git
+    ignore = untracked
+[submodule "vim/bundle/yankring"]
+	path = vim/bundle/yankring
+	url = http://github.com/vim-scripts/YankRing.vim.git
+    ignore = untracked

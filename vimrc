@@ -40,11 +40,30 @@ set cursorline
 " highlight searches
 set hlsearch
 
-map <F1> :NERDTreeFind <CR>
-map <F2> :NERDTreeToggle getcwd() <CR>
+""""""""" 
+"NERDTREE
+"""""""""
+map <F1> :NERDTreeToggle  <CR>
+map <F2> :NERDTreeFind <CR>
+
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
 
 
-"tabs
+
+"""""""
+" TABS
+"""""""
 map <C-h> :MBEbp<CR>
 map <C-l> :MBEbn<CR>
 let g:miniBufExplorerMoreThanOne = 2
@@ -121,7 +140,7 @@ nnoremap <leader>c zc
 " open all folds 
 nnoremap <leader>o zR
 " close all folds 
-nnoremap <leader>f zM
+nnoremap <leader>C zM
 " delete fold at cursor
 nnoremap <leader>d zd
 
@@ -137,6 +156,7 @@ set wildmenu
 
 " press <F3> to toggle :set paste
 set pastetoggle=<F3>
+
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
