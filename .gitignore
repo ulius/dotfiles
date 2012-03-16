@@ -6,3 +6,4 @@ vim/doc/command-t.txt
 *.swp
 *.swo
 vim/.netrwhist
+vim/.NERDTreeBookmarks
