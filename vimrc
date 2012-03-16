@@ -98,6 +98,7 @@ map <F1> :NERDTreeToggle  <CR>
 map <F2> :NERDTreeFind <CR>
 let NERDTreeShowBookmarks=1
 let NERDTreeBookmarksFile= expand($HOME) . '/dotfiles/vim/.NERDTreeBookmarks'
+let NERDTreeChDirMode=2
 
 " Close vim if NERDTree is last open buffer
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
@@ -112,8 +113,6 @@ function! s:CloseIfOnlyNerdTreeLeft()
 endfunction
 "}}}
 " miniBufExpl ------------------------------------------------------------------ {{{
-map <C-h> :MBEbp<CR>
-map <C-l> :MBEbn<CR>
 let g:miniBufExplorerMoreThanOne = 2
 "let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
@@ -140,7 +139,7 @@ function! ShowRoutes()
 endfunction
 map <leader>gR :call ShowRoutes()<cr>
 map <leader>gv :CommandTFlush<cr>\|:CommandT Resources/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT Controllers<cr>
+map <leader>gc :CommandTFlush<cr>\|:CommandT Controller<cr>
 map <leader>ge :CommandTFlush<cr>\|:CommandT Entity<cr>
 map <leader>gj :CommandTFlush<cr>\|:CommandT Resources/public/js<cr>
 map <leader>gs :CommandTFlush<cr>\|:CommandT Resources/public/css<cr>
@@ -156,7 +155,7 @@ nnoremap <silent> <F9> :TagbarToggle<CR>
 " TODO: need to get syntastic working
 " PHP -------------------------------------------------------------------------- {{{
 " Checks current file for php parser errors
-noremap <C-L> :!php -l %<CR>
+" noremap <C-L> :!php -l %<CR>
 " }}}
 " Javascript ------------------------------------------------------------------- {{{
 " so javascript indents after return
