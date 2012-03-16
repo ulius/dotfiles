@@ -97,6 +97,7 @@ nnoremap <c-l> <c-w>l
 map <F1> :NERDTreeToggle  <CR>
 map <F2> :NERDTreeFind <CR>
 let NERDTreeShowBookmarks=1
+let NERDTreeBookmarksFile= expand($HOME) . '/dotfiles/vim/.NERDTreeBookmarks'
 
 " Close vim if NERDTree is last open buffer
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
@@ -221,15 +222,10 @@ autocmd BufWinEnter *.* silent loadview
 " Command-line mode
 " =================
 " <C-R> <C-W> while in command-line mode inserts the text your cursor is currently over
+" :let NERDTreeBookmarks  shows the name of the variable
 "
 " All modes
 " =========
 " set ve=all : allow 'virtual editing', allowing cursor to be positioned where there is no actual character
 " set ve=    : disallow 'virtual editing'; :help virtualedit for details
 " }}}
-
-
-
-
-
-
