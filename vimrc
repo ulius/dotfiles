@@ -217,7 +217,7 @@ autocmd BufWinEnter *.* silent loadview
         set statusline+=%-14(%l,%c%V%)               " line, character  
         set statusline+=%<%P                         " file position  
 "}}}  
-" Vim Tips ------------------------------------------------------------------------ {{{
+" Vim Tips --------------------------------------------------------------------- {{{
 " Command-line mode
 " =================
 " <C-R> <C-W> while in command-line mode inserts the text your cursor is currently over
