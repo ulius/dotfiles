@@ -1,22 +1,19 @@
+" .vimrc
+" Author: Ulrich Werner <ulrichwern@gmail.com>
+" vim:fdm=marker
+
+" Main
+" Basic setup ------------------------------------------------------------------ {{{
 set t_Co=256
 colorscheme zenburn
 syntax on
-
-"filetype off
-"call pathogen#runtime_append_all_bundles()
-
 call pathogen#helptags()
 call pathogen#infect()
-
 filetype indent on
 filetype plugin on
-
 set ruler
 let mapleader = ","
-
-
-"make backspace work
-set bs=2 
+set bs=2  "make backspace work
 
 "searching/moving
 set ignorecase
@@ -32,118 +29,18 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
-
 set hidden
+set cursorline " highlight current line
+set hlsearch   " highlight searches
+set scrolloff=10 " allows me to see more text as im scrolling down
 
-" highlight current line
-set cursorline
-" highlight searches
-set hlsearch
-
-""""""""" 
-"NERDTREE
-"""""""""
-map <F1> :NERDTreeToggle  <CR>
-map <F2> :NERDTreeFind <CR>
-
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
-    endif
-  endif
-endfunction
-
-
-
-"""""""
-" TABS
-"""""""
-map <C-h> :MBEbp<CR>
-map <C-l> :MBEbn<CR>
-let g:miniBufExplorerMoreThanOne = 2
-"let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1 
-
-" Status Line {  
-        set laststatus=2                             " always show statusbar  
-        set statusline=  
-        set statusline+=%-10.3n\                     " buffer number  
-        set statusline+=%f\                          " filename   
-        set statusline+=%h%m%r%w                     " status flags  
-        set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type  
-        set statusline+=%{fugitive#statusline()}     " right align remainder  
-        set statusline+=%=                           " right align remainder  
-        set statusline+=0x%-8B                       " character value  
-        set statusline+=%-14(%l,%c%V%)               " line, character  
-        set statusline+=%<%P                         " file position  
-"}  
-
-" Filetype
+" remap <esc> to kj    
+imap kj <ESC>
+" }}}
+" Filetypes -------------------------------------------------------------------- {{{
 au BufNewFile,BufRead *.twig set filetype=jinja
-
-" PHP parser check (CTRL-L)
-" Checks current file for php parser errors
-noremap <C-L> :!php -l %<CR>
-
-
-
-set scrolloff=10
-
-" so javascript indents after return
-"  http://stackoverflow.com/a/5326852
-set nocindent smartindent
-
-
-" Tagbar
-nnoremap <silent> <F9> :TagbarToggle<CR> 
-
-" save and restore folds when a file is closed and re-opened
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
-
-" folding
-fu! CustomFoldText()
-    "get first non-blank line
-    let fs = v:foldstart
-    while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
-    endwhile
-    if fs > v:foldend
-        let line = getline(v:foldstart)
-    else
-        let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
-    endif
-
-    let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
-    let foldSize = 1 + v:foldend - v:foldstart
-    let foldSizeStr = " " . foldSize . " lines "
-    let foldLevelStr = repeat("+--", v:foldlevel)
-    let lineCount = line("$")
-    let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
-    let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
-    return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
-endf
-set foldtext=CustomFoldText()
-
-
-" Fold Backbone.js files on .extend lines
-let @p = "/.extendzf%j"
-nnoremap <leader>b @p 
-nnoremap <leader>c zc
-" open all folds 
-nnoremap <leader>o zR
-" close all folds 
-nnoremap <leader>C zM
-" delete fold at cursor
-nnoremap <leader>d zd
-
+" }}}
+" Extras ----------------------------------------------------------------------- {{{
 " Reload VIMRC in file
 "nnoremap <leader>r :source $MYVIMRC
 " Quickly edit/reload the vimrc file
@@ -166,7 +63,8 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-
+" }}}
+" Editing/Renaming Files ------------------------------------------------------- {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -192,13 +90,36 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+" }}}
 
-" remap <esc> to kj    
-imap kj <ESC>
+" Plugins 
+" NERDTree --------------------------------------------------------------------- {{{
+map <F1> :NERDTreeToggle  <CR>
+map <F2> :NERDTreeFind <CR>
+let NERDTreeShowBookmarks=1
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Close vim if NERDTree is last open buffer
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
+"}}}
+" miniBufExpl ------------------------------------------------------------------ {{{
+map <C-h> :MBEbp<CR>
+map <C-l> :MBEbn<CR>
+let g:miniBufExplorerMoreThanOne = 2
+"let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1 
+" }}}
+" Command-T -------------------------------------------------------------------- {{{
 map <leader>gr :topleft :split Resources/config/routing.yml<cr>
 function! ShowRoutes()
   " Requires 'scratch' plugin
@@ -225,5 +146,90 @@ map <leader>gs :CommandTFlush<cr>\|:CommandT Resources/public/css<cr>
 map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
 map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-"map <leader>gg :topleft 100 :split Gemfile<cr>
+" }}}
+" Tagbar ----------------------------------------------------------------------- {{{
+nnoremap <silent> <F9> :TagbarToggle<CR> 
+"}}}
+
+" Testing & Linting
+" TODO: need to get syntastic working
+" PHP -------------------------------------------------------------------------- {{{
+" Checks current file for php parser errors
+noremap <C-L> :!php -l %<CR>
+" }}}
+" Javascript ------------------------------------------------------------------- {{{
+" so javascript indents after return
+"  http://stackoverflow.com/a/5326852
+"set nocindent smartindent
+"}}}
+
+
+
+" Folding ---------------------------------------------------------------------- {{{
+fu! CustomFoldText()
+    "get first non-blank line
+    let fs = v:foldstart
+    while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+    endwhile
+    if fs > v:foldend
+        let line = getline(v:foldstart)
+    else
+        let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+    endif
+
+    let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+    let foldSize = 1 + v:foldend - v:foldstart
+    let foldSizeStr = " " . foldSize . " lines "
+    let foldLevelStr = repeat("+--", v:foldlevel)
+    let lineCount = line("$")
+    let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+    let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
+    return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+endf
+set foldtext=CustomFoldText()
+
+" Fold Backbone.js files on .extend lines
+let @p = "/.extendzf%j"
+nnoremap <leader>b @p 
+nnoremap <leader>c zc
+" open all folds 
+nnoremap <leader>o zR
+" close all folds 
+nnoremap <leader>C zM
+" delete fold at cursor
+nnoremap <leader>d zd
+
+" save and restore folds when a file is closed and re-opened
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+" }}}
+
+" Status Line ------------------------------------------------------------------ {{{
+        set laststatus=2                             " always show statusbar  
+        set statusline=  
+        set statusline+=%-10.3n\                     " buffer number  
+        set statusline+=%f\                          " filename   
+        set statusline+=%h%m%r%w                     " status flags  
+        set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type  
+        set statusline+=%{fugitive#statusline()}     " right align remainder  
+        set statusline+=%=                           " right align remainder  
+        set statusline+=0x%-8B                       " character value  
+        set statusline+=%-14(%l,%c%V%)               " line, character  
+        set statusline+=%<%P                         " file position  
+"}}}  
+" Vim Tips ------------------------------------------------------------------------ {{{
+" Command-line mode
+" =================
+" <C-R> <C-W> while in command-line mode inserts the text your cursor is currently over
+"
+" All modes
+" =========
+" set ve=all : allow 'virtual editing', allowing cursor to be positioned where there is no actual character
+" set ve=    : disallow 'virtual editing'; :help virtualedit for details
+" }}}
+
+
+
+
+
 

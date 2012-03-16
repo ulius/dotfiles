@@ -51,3 +51,9 @@
 	path = vim/bundle/yankring
 	url = http://github.com/vim-scripts/YankRing.vim.git
     ignore = untracked
+[submodule "vim/bundle/taskpaper"]
+	path = vim/bundle/taskpaper
+	url = http://github.com/davidoc/taskpaper.vim.git
+[submodule "z"]
+	path = z
+	url = http://github.com/rupa/z.git
