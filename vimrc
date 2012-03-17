@@ -36,6 +36,7 @@ set scrolloff=10 " allows me to see more text as im scrolling down
 
 " remap <esc> to kj    
 imap kj <ESC>
+map ,w :wq <CR>
 " }}}
 " Filetypes -------------------------------------------------------------------- {{{
 au BufNewFile,BufRead *.twig set filetype=jinja
@@ -95,7 +96,7 @@ nnoremap <c-l> <c-w>l
 " Plugins 
 " NERDTree --------------------------------------------------------------------- {{{
 map <F1> :NERDTreeToggle  <CR>
-map <F2> :NERDTreeFind <CR>
+"map <F2> :NERDTreeFind <CR>
 let NERDTreeShowBookmarks=1
 let NERDTreeBookmarksFile= expand($HOME) . '/dotfiles/vim/.NERDTreeBookmarks'
 let NERDTreeChDirMode=2
@@ -150,6 +151,9 @@ map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
 " Tagbar ----------------------------------------------------------------------- {{{
 nnoremap <silent> <F9> :TagbarToggle<CR> 
 "}}}
+" Taskpaper -------------------------------------------------------------------- {{{
+map <F2> :50vs ~/dotfiles/vim/.tasks.taskpaper<cr>
+" }}}
 
 " Testing & Linting
 " TODO: need to get syntastic working

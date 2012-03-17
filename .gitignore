@@ -7,3 +7,4 @@ vim/doc/command-t.txt
 *.swo
 vim/.netrwhist
 vim/.NERDTreeBookmarks
+vim/.tasks.taskpaper
