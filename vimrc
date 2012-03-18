@@ -37,13 +37,12 @@ set scrolloff=10 " allows me to see more text as im scrolling down
 " remap <esc> to kj    
 imap kj <ESC>
 map ,w :wq <CR>
+set foldmethod=manual
 " }}}
 " Filetypes -------------------------------------------------------------------- {{{
 au BufNewFile,BufRead *.twig set filetype=jinja
 " }}}
 " Extras ----------------------------------------------------------------------- {{{
-" Reload VIMRC in file
-"nnoremap <leader>r :source $MYVIMRC
 " Quickly edit/reload the vimrc file
 nmap  <leader>ev :vs $MYVIMRC<CR>
 nmap  <leader>sv :so $MYVIMRC<CR>
@@ -84,7 +83,7 @@ function! RenameFile()
         redraw!
     endif
 endfunction
-map <leader>n :call RenameFile()<cr>
+map <leader>r :call RenameFile()<cr>
 
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
@@ -153,6 +152,9 @@ nnoremap <silent> <F9> :TagbarToggle<CR>
 "}}}
 " Taskpaper -------------------------------------------------------------------- {{{
 map <F2> :50vs ~/dotfiles/vim/.tasks.taskpaper<cr>
+" }}}
+" JSHint ----------------------------------------------------------------------- {{{
+nnoremap <leader>n :cn <CR>
 " }}}
 
 " Testing & Linting
