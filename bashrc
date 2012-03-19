@@ -7,7 +7,11 @@ fi
 
 # User specific aliases and functions
 # Paths ----------------------------------------------------------------------
+<<<<<<< HEAD
 export PATH=$PATH:/var/www/html/health/Symfony/app:/usr/local/bin/:/usr/bin:/home/uli/html/event/app
+=======
+export PATH=$PATH:/usr/local/bin/:/usr/bin
+>>>>>>> fad41912fc0c53b320e674c933446b4a51444c2e
 export NODE_PATH=$NODE_PATH:/usr/local/src/doctorjs/lib/jsctags
 export EDITOR=vim
 export LANG=.en_US. # so pstree displays correctly
