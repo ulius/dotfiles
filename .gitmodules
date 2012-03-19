@@ -57,3 +57,6 @@
 [submodule "lib/z"]
 	path = lib/z
 	url = http://github.com/rupa/z.git
+[submodule "vim/bundle/jshint"]
+	path = vim/bundle/jshint
+	url = http://github.com/walm/jshint.vim.git

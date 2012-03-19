@@ -64,6 +64,9 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 " }}}
+
+" Yank selection to system clipboard
+vnoremap Y "*y
 " Editing/Renaming Files ------------------------------------------------------- {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
@@ -155,6 +158,8 @@ map <F2> :50vs ~/dotfiles/vim/.tasks.taskpaper<cr>
 " }}}
 " JSHint ----------------------------------------------------------------------- {{{
 nnoremap <leader>n :cn <CR>
+" clear quickfix list
+":call setqflist([])
 " }}}
 
 " Testing & Linting
