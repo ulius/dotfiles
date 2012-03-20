@@ -56,7 +56,7 @@ set pastetoggle=<F3>
 
 
 " Show syntax highlighting groups for word under cursor
-nmap <C-S-P> :call <SID>SynStack()<CR>
+nmap <C-S-I> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
@@ -64,9 +64,11 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 " }}}
-
-" Yank selection to system clipboard
-vnoremap Y "*y
+" Vimdiff ---------------------------------------------------------------------- {{{
+" vimdiff color scheme
+ highlight DiffChange cterm=none ctermfg=black ctermbg=LightGreen gui=none guifg=bg guibg=LightGreen
+ highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=Red
+" }}}
 " Editing/Renaming Files ------------------------------------------------------- {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
@@ -156,10 +158,12 @@ nnoremap <silent> <F9> :TagbarToggle<CR>
 " Taskpaper -------------------------------------------------------------------- {{{
 map <F2> :50vs ~/dotfiles/vim/.tasks.taskpaper<cr>
 " }}}
-" JSHint ----------------------------------------------------------------------- {{{
-nnoremap <leader>n :cn <CR>
-" clear quickfix list
-":call setqflist([])
+" Syntastic -------------------------------------------------------------------- {{{
+" passive mode lets me toggle syntastic on, instead of it being run on file save
+let g:syntastic_mode_map = { 'mode': 'passive' }
+" syntastic users vim's location lists; use :lnext and :lprev to cycle through errors
+nnoremap <leader>n :lnext <CR>
+nnoremap <leader>m :lprev <CR>
 " }}}
 
 " Testing & Linting
@@ -229,6 +233,7 @@ autocmd BufWinEnter *.* silent loadview
         set statusline+=%<%P                         " file position  
 "}}}  
 " Vim Tips --------------------------------------------------------------------- {{{
+" http://stackoverflow.com/a/1220118 : lots of good tips
 " Command-line mode
 " =================
 " <C-R> <C-W> while in command-line mode inserts the text your cursor is currently over
@@ -238,4 +243,6 @@ autocmd BufWinEnter *.* silent loadview
 " =========
 " set ve=all : allow 'virtual editing', allowing cursor to be positioned where there is no actual character
 " set ve=    : disallow 'virtual editing'; :help virtualedit for details
+" :!r {some command} : executes a bash command and read the output into vim
 " }}}
+"
