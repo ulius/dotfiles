@@ -60,3 +60,9 @@
 [submodule "vim/bundle/jshint"]
 	path = vim/bundle/jshint
 	url = http://github.com/walm/jshint.vim.git
+[submodule "vim/bundle/indent-guides"]
+	path = vim/bundle/indent-guides
+	url = http://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "vim/bundle/jsbeautify"]
+	path = vim/bundle/jsbeautify
+	url = http://github.com/somethingkindawierd/jsbeautify.git
