@@ -22,6 +22,3 @@ source ~/dotfiles/lib/z/z.sh
 if [ -f ~/.bashrc_local ]; then
 	. ~/.bashrc_local
 fi
-
-
-

@@ -38,6 +38,8 @@ set scrolloff=10 " allows me to see more text as im scrolling down
 imap kj <ESC>
 map ,w :wq <CR>
 set foldmethod=manual
+
+set history=1000
 " }}}
 " Filetypes -------------------------------------------------------------------- {{{
 au BufNewFile,BufRead *.twig set filetype=jinja
@@ -97,90 +99,19 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 " }}}
-
-" Plugins 
-" NERDTree --------------------------------------------------------------------- {{{
-map <F1> :NERDTreeToggle  <CR>
-"map <F2> :NERDTreeFind <CR>
-let NERDTreeShowBookmarks=1
-let NERDTreeBookmarksFile= expand($HOME) . '/dotfiles/vim/.NERDTreeBookmarks'
-let NERDTreeChDirMode=2
-
-" Close vim if NERDTree is last open buffer
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
-    endif
-  endif
-endfunction
-"}}}
-" miniBufExpl ------------------------------------------------------------------ {{{
-let g:miniBufExplorerMoreThanOne = 2
-"let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1 
-" }}}
-" Command-T -------------------------------------------------------------------- {{{
-map <leader>gr :topleft :split Resources/config/routing.yml<cr>
-function! ShowRoutes()
-  " Requires 'scratch' plugin
-  :topleft 50 :split __Routes__
-  " Make sure Vim doesn't write __Routes__ as a file
-  :set buftype=nofile
-  " Delete everything
-  :normal 1GdG
-  " Put routes output in buffer
-  :0r! console router:debug --env=prod
-  " Size window to number of lines (1 plus rake output length)
-  :execute ":normal " . line("$") . "_ "
-  " Move cursor to bottom
-  :normal 1GG
-  " Delete empty trailing line
-  :normal dd
-endfunction
-map <leader>gR :call ShowRoutes()<cr>
-map <leader>gv :CommandTFlush<cr>\|:CommandT Resources/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT Controller<cr>
-map <leader>ge :CommandTFlush<cr>\|:CommandT Entity<cr>
-map <leader>gj :CommandTFlush<cr>\|:CommandT Resources/public/js<cr>
-map <leader>gs :CommandTFlush<cr>\|:CommandT Resources/public/css<cr>
-map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-" }}}
-" Tagbar ----------------------------------------------------------------------- {{{
-nnoremap <silent> <F9> :TagbarToggle<CR> 
-"}}}
-" Taskpaper -------------------------------------------------------------------- {{{
-map <F2> :50vs ~/dotfiles/vim/.tasks.taskpaper<cr>
-" }}}
-" Syntastic -------------------------------------------------------------------- {{{
-" passive mode lets me toggle syntastic on, instead of it being run on file save
-let g:syntastic_mode_map = { 'mode': 'passive' }
-" syntastic users vim's location lists; use :lnext and :lprev to cycle through errors
-nnoremap <leader>n :lnext <CR>
-nnoremap <leader>m :lprev <CR>
-" }}}
-
-" Testing & Linting
-" TODO: need to get syntastic working
-" PHP -------------------------------------------------------------------------- {{{
-" Checks current file for php parser errors
-" noremap <C-L> :!php -l %<CR>
-" }}}
-" Javascript ------------------------------------------------------------------- {{{
-" so javascript indents after return
-"  http://stackoverflow.com/a/5326852
-"set nocindent smartindent
-"}}}
-
-
-
+" Status Line ------------------------------------------------------------------ {{{
+        set laststatus=2                             " always show statusbar  
+        set statusline=  
+        set statusline+=%-10.3n\                     " buffer number  
+        set statusline+=%f\                          " filename   
+        set statusline+=%h%m%r%w                     " status flags  
+        set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type  
+        set statusline+=%{fugitive#statusline()}     " right align remainder  
+        set statusline+=%=                           " right align remainder  
+        set statusline+=0x%-8B                       " character value  
+        set statusline+=%-14(%l,%c%V%)               " line, character  
+        set statusline+=%<%P                         " file position  
+"}}}  
 " Folding ---------------------------------------------------------------------- {{{
 fu! CustomFoldText()
     "get first non-blank line
@@ -220,30 +151,126 @@ autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 " }}}
 
-" Status Line ------------------------------------------------------------------ {{{
-        set laststatus=2                             " always show statusbar  
-        set statusline=  
-        set statusline+=%-10.3n\                     " buffer number  
-        set statusline+=%f\                          " filename   
-        set statusline+=%h%m%r%w                     " status flags  
-        set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type  
-        set statusline+=%{fugitive#statusline()}     " right align remainder  
-        set statusline+=%=                           " right align remainder  
-        set statusline+=0x%-8B                       " character value  
-        set statusline+=%-14(%l,%c%V%)               " line, character  
-        set statusline+=%<%P                         " file position  
-"}}}  
-" Vim Tips --------------------------------------------------------------------- {{{
+" Plugins 
+" NERDTree --------------------------------------------------------------------- {{{
+map <F1> :NERDTreeToggle  <CR>
+"map <F2> :NERDTreeFind <CR>
+let NERDTreeShowBookmarks=1
+let NERDTreeBookmarksFile= expand($HOME) . '/dotfiles/vim/.NERDTreeBookmarks'
+let NERDTreeChDirMode=2
+
+" Close vim if NERDTree is last open buffer
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
+"}}}
+" miniBufExpl ------------------------------------------------------------------ {{{
+let g:miniBufExplorerMoreThanOne = 2
+"let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1 
+" }}}
+" Command-T -------------------------------------------------------------------- {{{
+function! ShowRoutes()
+  " Requires 'scratch' plugin
+  :topleft 50 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! console router:debug --env=prod
+  " Size window to number of lines (1 plus rake output length)
+  :execute ":normal " . line("$") . "_ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+map <leader>gr :topleft :split Resources/config/routing.yml<cr>
+map <leader>gR :call ShowRoutes()<cr>
+map <leader>gv :CommandTFlush<cr>\|:CommandT Resources/views<cr>
+map <leader>gc :CommandTFlush<cr>\|:CommandT Controller<cr>
+map <leader>ge :CommandTFlush<cr>\|:CommandT Entity<cr>
+map <leader>gE :CommandTFlush<cr>\|:CommandT Repository<cr>
+map <leader>gj :CommandTFlush<cr>\|:CommandT Resources/public/js<cr>
+map <leader>gs :CommandTFlush<cr>\|:CommandT Resources/public/css<cr>
+map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
+map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+" }}}
+" Tagbar ----------------------------------------------------------------------- {{{
+nnoremap <silent> <F9> :TagbarToggle<CR> 
+"}}}
+" Taskpaper -------------------------------------------------------------------- {{{
+map <F2> :sp ~/dotfiles/vim/.tasks.taskpaper<cr>
+let g:task_paper_date_format = "%Y-%m-%d %H:%M"
+" }}}
+" Syntastic -------------------------------------------------------------------- {{{
+" passive mode lets me toggle syntastic on, instead of it being run on file save
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
+" syntastic uses vim's location lists; use :lnext and :lprev to cycle through errors
+nnoremap <leader>n :lnext <CR>
+nnoremap <leader>m :lprev <CR>
+
+nnoremap <leader>ss :SyntasticCheck <CR>
+nnoremap <leader>st :SyntasticToggleMode<cr>\|:redraw!<cr>
+nnoremap <leader>sE :Errors <cr>
+" }}}
+" Snipmate  -------------------------------------------------------------------- {{{
+au BufRead,BufNewFile *.js set filetype=javascript
+" }}}
+" JsBeautify  ------------------------------------------------------------------ {{{
+nnoremap <leader>ff :call g:Jsbeautify()<cr>
+" }}}
+
+" Testing & Linting
+" PHP -------------------------------------------------------------------------- {{{
+" Checks current file for php parser errors
+" noremap <C-L> :!php -l %<CR>
+" }}}
+" Javascript ------------------------------------------------------------------- {{{
+" so javascript indents after return
+"  http://stackoverflow.com/a/5326852
+"set nocindent smartindent
+"}}}
+
+" Vim Tips 
+" Command-line mode ------------------------------------------------------------ {{{
 " http://stackoverflow.com/a/1220118 : lots of good tips
-" Command-line mode
-" =================
 " <C-R> <C-W> while in command-line mode inserts the text your cursor is currently over
 " :let NERDTreeBookmarks  shows the name of the variable
-"
-" All modes
-" =========
+" }}}
+" All modes -------------------------------------------------------------------- {{{
 " set ve=all : allow 'virtual editing', allowing cursor to be positioned where there is no actual character
 " set ve=    : disallow 'virtual editing'; :help virtualedit for details
 " :!r {some command} : executes a bash command and read the output into vim
+" }}}
+" Folding ---------------------------------------------------------------------- {{{
+" zf#j creates a fold from the cursor down # lines.
+" zf/string creates a fold from the cursor to string .
+" zj moves the cursor to the next fold.
+" zk moves the cursor to the previous fold.
+" zo opens a fold at the cursor.
+" zO opens all folds at the cursor.
+" zm increases the foldlevel by one.
+" zM closes all open folds.
+" zr decreases the foldlevel by one.
+" zR decreases the foldlevel to zero -- all folds will be open.
+" zd deletes the fold at the cursor.
+" zE deletes all folds.
+" [z move to start of open fold.
+" ]z move to end of open fold.
+" }}}
+" Current Filename ------------------------------------------------------------- {{{
+" :echo expand("%:p")
 " }}}
 "

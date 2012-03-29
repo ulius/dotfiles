@@ -5,6 +5,8 @@ vim/plugin/command-t.vim
 vim/doc/command-t.txt
 *.swp
 *.swo
+*.swm
+*.swn
 vim/.netrwhist
 vim/.NERDTreeBookmarks
 vim/.tasks.taskpaper
