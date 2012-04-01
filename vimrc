@@ -43,6 +43,7 @@ set history=1000
 " }}}
 " Filetypes -------------------------------------------------------------------- {{{
 au BufNewFile,BufRead *.twig set filetype=jinja
+au BufNewFile,BufRead *.less set filetype=less
 " }}}
 " Extras ----------------------------------------------------------------------- {{{
 " Quickly edit/reload the vimrc file

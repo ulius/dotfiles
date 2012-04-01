@@ -1,0 +1,15 @@
+# Some useful articles:
+# http://stackoverflow.com/questions/4119991/bash-call-script-with-customized-keyboard-shortcuts
+# http://askubuntu.com/questions/110371/how-to-correctly-get-right-keyseq-for-readline-in-inputrc
+
+
+"\ea\ei": "sudo aptitude install "
+
+# Alt+e --- kill one word backwards
+"\ee": backward-kill-word 
+
+
+# Tips
+# ----
+# CTRL-x CTRL-r --- reload .inputrc file
+# \e means ALT
