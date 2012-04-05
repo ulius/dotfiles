@@ -231,6 +231,9 @@ au BufRead,BufNewFile *.js set filetype=javascript
 " JsBeautify  ------------------------------------------------------------------ {{{
 nnoremap <leader>ff :call g:Jsbeautify()<cr>
 " }}}
+" YankRing  ------------------------------------------------------------------ {{{
+nnoremap <leader>y :YRShow <cr>
+" }}}
 
 " Testing & Linting
 " PHP -------------------------------------------------------------------------- {{{
@@ -273,4 +276,7 @@ nnoremap <leader>ff :call g:Jsbeautify()<cr>
 " Current Filename ------------------------------------------------------------- {{{
 " :echo expand("%:p")
 " }}}
-"
+" Moving ------------------------------------------------------------- {{{
+" ''   : move to previous position
+" }}}
+" 
