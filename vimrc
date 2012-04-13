@@ -20,7 +20,7 @@ set ignorecase
 set smartcase
 nnoremap <leader><space> :noh<cr>
 
-"to stop from hitting the goddamn help menu
+"to stop from hitting the help menu
 inoremap <F1> <ESC> 
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
@@ -36,7 +36,8 @@ set scrolloff=10 " allows me to see more text as im scrolling down
 
 " remap <esc> to kj    
 imap kj <ESC>
-map ,w :wq <CR>
+map ,w :w <CR>
+map ,W :wq <CR>
 set foldmethod=manual
 
 set history=1000
@@ -150,6 +151,21 @@ nnoremap <leader>d zd
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 " }}}
+" Custom Mappings -------------------------------------------------------------- {{{
+" +===========+
+" |   NORMAL  |
+" +===========+
+"
+" +===========+
+" |   INSERT  |
+" +===========+
+" Uppercase entire word
+imap <c-u> <esc>viwUea
+" +===========+
+" |  COMMAND  |
+" +===========+
+"
+" }}}
 
 " Plugins 
 " NERDTree --------------------------------------------------------------------- {{{
@@ -231,6 +247,10 @@ au BufRead,BufNewFile *.js set filetype=javascript
 " JsBeautify  ------------------------------------------------------------------ {{{
 nnoremap <leader>ff :call g:Jsbeautify()<cr>
 " }}}
+" Tabular  ------------------------------------------------------------------ {{{
+nmap <leader>z: :Tab /:\zs <cr>
+nmap <leader>z= :Tab /=\zs <cr>
+" }}}
 
 " Testing & Linting
 " PHP -------------------------------------------------------------------------- {{{
@@ -238,9 +258,7 @@ nnoremap <leader>ff :call g:Jsbeautify()<cr>
 " noremap <C-L> :!php -l %<CR>
 " }}}
 " Javascript ------------------------------------------------------------------- {{{
-" so javascript indents after return
-"  http://stackoverflow.com/a/5326852
-"set nocindent smartindent
+nmap  <leader>t :vs $MYVIMRC<CR>
 "}}}
 
 " Vim Tips 
@@ -273,4 +291,11 @@ nnoremap <leader>ff :call g:Jsbeautify()<cr>
 " Current Filename ------------------------------------------------------------- {{{
 " :echo expand("%:p")
 " }}}
-"
+" Book about Vimscript ------------------------------------------------------------- {{{
+" http://learnvimscriptthehardway.stevelosh.com/chapters/21.html
+" }}}
+" so javascript indents after return
+"  http://stackoverflow.com/a/5326852
+"set nocindent smartindent
+
+

@@ -7,14 +7,14 @@ snippet bc
 
 # Model
 snippet bbm
-	${1:Thing} = Backbone.Model.extend({
+	var ${1:Thing} = Backbone.Model.extend({
 		initialize: function () {
 		}   
 	});
 
 # Collection
 snippet bbc
-	${1:Thing} = Backbone.Collection.extend({
+	var ${1:Thing} = Backbone.Collection.extend({
 		model: ${2:Thing}
 	});
 
@@ -27,7 +27,7 @@ snippet bbr
 
 # View
 snippet bbv
-	window.${1:ViewName} = Backbone.View.extend({
+	var ${1:ViewName} = Backbone.View.extend({
 		tagName: '${2:Tag}',
 		someTemplate: _.template($("#${3:some-id}").html()),
 
@@ -48,4 +48,9 @@ snippet bbvnew
 		model: model,
 		collection: collection
 	});
+# Closure
+snippet clos
+	var ${1:Name} = (function(){
+
+	})();
 
