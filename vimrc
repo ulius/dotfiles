@@ -251,7 +251,7 @@ nnoremap <leader>ff :call g:Jsbeautify()<cr>
 " Tabular  ------------------------------------------------------------------ {{{
 nmap <leader>z: :Tab /:\zs <cr>
 nmap <leader>z= :Tab /=\zs <cr>
-}}}
+" }}}
 " YankRing  ------------------------------------------------------------------ {{{
 nnoremap <leader>y :YRShow <cr>
 " }}}
