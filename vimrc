@@ -36,10 +36,11 @@ set scrolloff=10 " allows me to see more text as im scrolling down
 
 " remap <esc> to kj    
 imap kj <ESC>
-map ,w :wq <CR>
+map <leader>w :w <CR>
 set foldmethod=manual
 
 set history=1000
+
 " }}}
 " Filetypes -------------------------------------------------------------------- {{{
 au BufNewFile,BufRead *.twig set filetype=jinja
@@ -233,6 +234,9 @@ nnoremap <leader>ff :call g:Jsbeautify()<cr>
 " }}}
 " YankRing  ------------------------------------------------------------------ {{{
 nnoremap <leader>y :YRShow <cr>
+" }}}
+" Clam  ------------------------------------------------------------------ {{{
+nnoremap ! :Clam<space>
 " }}}
 
 " Testing & Linting

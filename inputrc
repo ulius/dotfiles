@@ -6,7 +6,7 @@
 "\ea\ei": "sudo aptitude install "
 
 # Alt+e --- kill one word backwards
-"\ee": backward-kill-word 
+"\ew": backward-kill-word 
 
 
 # Tips
