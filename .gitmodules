@@ -69,3 +69,6 @@
 [submodule "vim/bundle/vim-coffeescript"]
 	path = vim/bundle/vim-coffeescript
 	url = http://github.com/kchmck/vim-coffee-script.git
+[submodule "vim/bundle/clam"]
+	path = vim/bundle/clam
+	url = http://github.com/sjl/clam.vim.git

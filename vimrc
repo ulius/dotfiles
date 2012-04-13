@@ -41,6 +41,7 @@ map ,W :wq <CR>
 set foldmethod=manual
 
 set history=1000
+
 " }}}
 " Filetypes -------------------------------------------------------------------- {{{
 au BufNewFile,BufRead *.twig set filetype=jinja
@@ -250,6 +251,12 @@ nnoremap <leader>ff :call g:Jsbeautify()<cr>
 " Tabular  ------------------------------------------------------------------ {{{
 nmap <leader>z: :Tab /:\zs <cr>
 nmap <leader>z= :Tab /=\zs <cr>
+}}}
+" YankRing  ------------------------------------------------------------------ {{{
+nnoremap <leader>y :YRShow <cr>
+" }}}
+" Clam  ------------------------------------------------------------------ {{{
+nnoremap ! :Clam<space>
 " }}}
 
 " Testing & Linting
@@ -297,5 +304,7 @@ nmap  <leader>t :vs $MYVIMRC<CR>
 " so javascript indents after return
 "  http://stackoverflow.com/a/5326852
 "set nocindent smartindent
-
-
+" Moving ------------------------------------------------------------- {{{
+" ''   : move to previous position
+" }}}
+" 
