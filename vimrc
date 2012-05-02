@@ -220,7 +220,7 @@ map <leader>ge :CommandTFlush<cr>\|:CommandT Entity<cr>
 map <leader>gE :CommandTFlush<cr>\|:CommandT Repository<cr>
 map <leader>gj :CommandTFlush<cr>\|:CommandT Resources/public/js<cr>
 map <leader>gs :CommandTFlush<cr>\|:CommandT Resources/public/css<cr>
-map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
+map <leader>gt :CommandTFlush<cr>\|:CommandT Tests<cr>
 map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
 " }}}
@@ -258,6 +258,9 @@ nnoremap <leader>y :YRShow <cr>
 " Clam  ------------------------------------------------------------------ {{{
 nnoremap ! :Clam<space>
 " }}}
+" Taglist  ------------------------------------------------------------------ {{{
+" http://lucasoman.blogspot.com/2010/09/vim-php-taglist-and-ctags.html
+" }}}
 
 " Testing & Linting
 " PHP -------------------------------------------------------------------------- {{{
@@ -265,7 +268,6 @@ nnoremap ! :Clam<space>
 " noremap <C-L> :!php -l %<CR>
 " }}}
 " Javascript ------------------------------------------------------------------- {{{
-nmap  <leader>t :vs $MYVIMRC<CR>
 "}}}
 
 " Vim Tips 
@@ -294,6 +296,8 @@ nmap  <leader>t :vs $MYVIMRC<CR>
 " zE deletes all folds.
 " [z move to start of open fold.
 " ]z move to end of open fold.
+" ==============
+" zfit fold an html node
 " }}}
 " Current Filename ------------------------------------------------------------- {{{
 " :echo expand("%:p")
