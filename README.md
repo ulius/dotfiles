@@ -1,4 +1,6 @@
-** To install:
-Clone this repository.
-./sync.sh
+To install:
+===========
+
+Clone this repository, then:
+    ./sync.sh
 
