@@ -7,8 +7,8 @@ fi
 
 # User specific aliases and functions
 # Paths ----------------------------------------------------------------------
-export PATH=$PATH:/usr/local/bin/:/usr/bin
-export NODE_PATH=$NODE_PATH:/usr/local/src/doctorjs/lib/jsctags
+export PATH=$PATH:/usr/bin:/usr/local/bin/
+export NODE_PATH=$NODE_PATH:/usr/local/src/doctorjs/lib/jsctags:/usr/local/lib/node_modules
 export EDITOR=vim
 export LANG=.en_US. # so pstree displays correctly
 
