@@ -321,4 +321,7 @@ set nocindent smartindent
 " Moving ------------------------------------------------------------- {{{
 " ''   : move to previous position
 " }}}
+" TODO ------------------------------------------------------------- {{{
+" http://technotales.wordpress.com/2011/04/15/coffeescript-vim-and-pathogen/
+" }}}
 " 
