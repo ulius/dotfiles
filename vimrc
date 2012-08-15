@@ -13,6 +13,7 @@ filetype indent on
 filetype plugin on
 set ruler
 let mapleader = ","
+let maplocalleader = "\\"
 set bs=2  "make backspace work
 
 "searching/moving
@@ -261,13 +262,22 @@ nnoremap ! :Clam<space>
 " Taglist  ------------------------------------------------------------------ {{{
 " http://lucasoman.blogspot.com/2010/09/vim-php-taglist-and-ctags.html
 " }}}
+" Powerline  ------------------------------------------------------------------ {{{
+set termencoding=utf-8
+scriptencoding utf-8
+set encoding=utf-8
+
+let g:Powerline_symbols = 'fancy'
+" }}}
 
 " Testing & Linting
 " PHP -------------------------------------------------------------------------- {{{
 " Checks current file for php parser errors
 " noremap <C-L> :!php -l %<CR>
+map <leader>q :w <cr> :Clam php % <cr>
 " }}}
 " Javascript ------------------------------------------------------------------- {{{
+set nocindent smartindent
 "}}}
 
 " Vim Tips 
@@ -307,7 +317,7 @@ nnoremap ! :Clam<space>
 " }}}
 " so javascript indents after return
 "  http://stackoverflow.com/a/5326852
-"set nocindent smartindent
+" set nocindent smartindent
 " Moving ------------------------------------------------------------- {{{
 " ''   : move to previous position
 " }}}
