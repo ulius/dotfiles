@@ -3,11 +3,26 @@
 	email = ulrichwern@gmail.com
 
 [alias]
-log1=log --pretty=oneline
-glg=log --pretty=oneline --graph --abbrev-commit
-loggraph = log --graph --all --full-history --color --branches --decorate
-awe=log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-	d = difftool
+    log1=log --pretty=oneline
+    glg=log --pretty=oneline --graph --abbrev-commit
+    loggraph = log --graph --all --full-history --color --branches --decorate
+    awe=log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
+    st = status
+    ci = commit
+    co = checkout
+    di = diff
+    dc = diff --cached
+    amend = commit --amend
+    aa = add --all
+    ff = merge --ff-only
+    pullff = pull --ff-only
+    noff = merge --no-ff
+    fa = fetch --all
+    pom = push origin master
+    b = branch
+    ds = diff --stat=160,120
+    dh1 = diff HEAD~1
 [core]
     pager=less -FRSX
     editor=vim
