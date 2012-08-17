@@ -20,8 +20,11 @@ source ~/dotfiles/lib/git-completion.bash
 source ~/dotfiles/lib/z/z.sh
 
 # Needed or vim has errors in TMUX -------------------------
+[ -z "$TMUX" ] && export TERM=xterm-256color
 alias tmux='tmux -2 -u'
-alias vim='env TERM=xterm-256color vim'
+# alias vim='env TERM=xterm-256color vim'
+# alias tmux='TERM=xterm-256color tmux'
+
 
 # Machine specific bash  ----------------------------------------------------------------------
 if [ -f ~/.bashrc_local ]; then

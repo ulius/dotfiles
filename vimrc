@@ -5,8 +5,8 @@
 " Main
 " Basic setup ------------------------------------------------------------------ {{{
 set t_Co=256
-colorscheme zenburn
 syntax on
+colorscheme zenburn
 call pathogen#helptags()
 call pathogen#infect()
 filetype indent on
@@ -22,9 +22,9 @@ set smartcase
 nnoremap <leader><space> :noh<cr>
 
 "to stop from hitting the help menu
-inoremap <F1> <ESC> 
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
+" inoremap <F1> <ESC> 
+" nnoremap <F1> <ESC>
+" vnoremap <F1> <ESC>
 
 set tabstop=4
 set shiftwidth=4
@@ -168,6 +168,8 @@ imap <c-u> <esc>viwUea
 " +===========+
 "
 " }}}
+" TMUX -------------------------------------------------------------- {{{
+" }}}
 
 " Plugins 
 " NERDTree --------------------------------------------------------------------- {{{
@@ -268,6 +270,9 @@ scriptencoding utf-8
 set encoding=utf-8
 
 let g:Powerline_symbols = 'fancy'
+" }}}
+" Solarized  ------------------------------------------------------------------ {{{
+let g:solarized_termcolors=16
 " }}}
 
 " Testing & Linting
