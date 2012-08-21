@@ -36,13 +36,18 @@ git submodule update --init
 ##########################
 # Install Command-T plugin
 # To avoid using ruby's bundler, I have to source the vimball then configure/make the C extension
+# 
+# If you get errors, make the C extension with the same
+# version of ruby vim was installed with:
+# vim --version
+# ruby --version
 #########################
 cd $dir
 # set nomore lets vim quit out after sourcing the vimball
 vim -c 'set nomore' -c 'so %'  -c 'q!' $dir/vim/vimball/command-t/command-t-1.3.1.vba
 # make the c extension so command-t works + is faster
 cd ~/.vim/ruby/command-t 
-ruby extconf.rb 
+/usr/bin/ruby185 extconf.rb 
 make 
 cd $dir
 

@@ -1,0 +1,21 @@
+#change-log {
+    margin-left: 10px;
+    //border: 1px solid blue;
+    width: 23%;
+    height: 700px;
+    overflow: auto;
+    float: right;
+    display: none;
+    ul { 
+        list-style: none;
+        padding: 0 5px 5px 5px;
+        margin: 5px;
+        li {
+            background: #eaeaea;
+            margin-top: 10px;
+            padding: 5px;
+            // border: 1px solid #f4f9ff;
+            // height: 50px;
+        }
+    }
+}
