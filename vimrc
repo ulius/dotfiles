@@ -168,8 +168,14 @@ imap <c-u> <esc>viwUea
 " +===========+
 "
 " }}}
-" TMUX -------------------------------------------------------------- {{{
-" }}}
+" Backups {{{
+" taken from steve losh: https://github.com/sjl/dotfiles/blob/master/vim/vimrc
+set undodir=~/.vim/tmp/undo//     " undo files
+set backupdir=~/.vim/tmp/backup// " backups
+set directory=~/.vim/tmp/swap//   " swap files
+set backup                        " enable backups
+set noswapfile                    " It's 2012, Vim.
+" " }}}
 
 " Plugins 
 " NERDTree --------------------------------------------------------------------- {{{
@@ -265,14 +271,8 @@ nnoremap ! :Clam<space>
 " http://lucasoman.blogspot.com/2010/09/vim-php-taglist-and-ctags.html
 " }}}
 " Powerline  ------------------------------------------------------------------ {{{
-set termencoding=utf-8
-scriptencoding utf-8
-set encoding=utf-8
-
 let g:Powerline_symbols = 'fancy'
-" }}}
-" Solarized  ------------------------------------------------------------------ {{{
-let g:solarized_termcolors=16
+call Pl#Theme#InsertSegment('fileformat','after','filename')
 " }}}
 
 " Testing & Linting
