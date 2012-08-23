@@ -170,9 +170,9 @@ imap <c-u> <esc>viwUea
 " }}}
 " Backups {{{
 " taken from steve losh: https://github.com/sjl/dotfiles/blob/master/vim/vimrc
-set undodir=~/.vim/tmp/undo//     " undo files
-set backupdir=~/.vim/tmp/backup// " backups
-set directory=~/.vim/tmp/swap//   " swap files
+set undodir=~/.vim/tmp/undo/     " undo files
+set backupdir=~/.vim/tmp/backup/ " backups
+set directory=~/.vim/tmp/swap/   " swap files
 set backup                        " enable backups
 set noswapfile                    " It's 2012, Vim.
 " " }}}
