@@ -1,0 +1,57 @@
+<div id="chat">
+    <div id="conversation">
+    <div class="name">
+        Josh Architorture Vandistortion
+    </div>
+    <div class="message">
+        o my first thread covered a lot of topics and is quickly getting jumbled. Let me start another one just to talk about DJs. Who's got ideas? Headliners? Locals? I for one would love to play and I know Shaggy is itching at it. As far as non-pirate DJs, I can try to talk to Dara and the Trouble&Bass guys. I can also give Jay a call and see if Light It Up is interested and maybe Nysus. I can also contact the PLF crew about bringing like Conway or Reinhold. I think Lina Luv was mentioned. Other ideas? I mostly concered about this headliner issue.
+    </div>
+    <div class="name">
+        Jessi Sprocket Janusee
+    </div>
+    <div class="message">
+        I agree with that. I guess I should've been more clear about both Boris and Lisa (The Secret Circus). Both of them are my good friends so I was just asking if they were booked yet and told them that we are in the very very beginning stages of a possible event. Just wanted to see if there was availability or interest. But I'm totally all for a DJ leader. :)
+    </div>
+
+    <div class="name">
+Gaetan Vj-static Spurgin
+    </div>
+    <div class="message">
+        agreed.. What I would like everyone to do is look inside and see what they want to do for this event.... there will be staff to help us with this event... Once everyone gets back with what they would like to do ... Positions and duties would be assigned
+    </div>
+    <div class="name">
+        Tina Schaffer
+    </div>
+    <div class="message">
+        talking to amanda mandalay currently about availability of the ELECTROCUTE girls for live acts, keep you posted. 
+    </div>
+    <div class="name">
+        Josh Architorture Vandistortion
+    </div>
+    <div class="message">
+        I personaly think the perception of PEX can assist in the value of our event.. heat, clean, bathrooms, Less house... Just sayin
+    </div>
+</div>
+    <div id="chat-input">
+        <textarea id="data"></textarea>
+        <button id="datasend">send</button>
+    </div>
+</div>
+
+<script src="http://192.168.62.206:7000/socket.io/socket.io.js"></script>
+<script>
+var socket = io.connect('http://192.168.62.206:7000');
+
+// on connection to server, ask for user's name with an anonymous callback
+socket.on('connect', function(){
+    // call the server-side function 'adduser' and send one parameter (value of prompt)
+    socket.emit('adduser', '{{ app.user }}', {{ app.session.get("activeEventId") }} );
+});
+
+socket.on('updatechat', function (username, data) {
+    $('#conversation').append('<div class="name">' + username + ':</div><div class="message">' + data + '</div>');
+    $('#conversation').scrollTop(100000000);
+});
+</script>
+
+

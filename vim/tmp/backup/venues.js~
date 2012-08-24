@@ -1,0 +1,303 @@
+/* Venues JS
+ * *********/
+window.APP = (function($){
+
+    // enables saving data to Symfony/MySQL
+    // check backbone.js docs for more info
+    Backbone.emulateHTTP = true;
+    Backbone.emulateJSON = true;
+
+    // MODELS
+    var Models = (function(){
+        var Venue = Backbone.NestedModel.extend({
+            defaults: {
+                "thumbsdown":  0,
+                "thumbsup":    0,
+                "capacity":    0,
+                "comments":   [],
+                "address":    "",
+                "phone":      ""
+            }
+        });
+        return {
+            Venue: Venue
+        };
+    })();
+    // COLLECTIONS
+    var Collections = (function() {
+        var Venues = Backbone.Collection.extend({
+            model: Models.Venue,
+            url: "/app_dev.php/rest/venues",
+            initialize: function() {
+                _.bindAll(this, 'orderByLastUpdate');
+            },
+            comparator: function(venue) {
+                return -Date.parse(venue.get('lastupdate'));     
+            },
+            orderByLastUpdate: function(venue) {
+                this.comparator = this.orderBy.lastUpdate;        
+                this.sort();
+            },
+            orderByName: function(venue) {
+                this.comparator = this.orderBy.name;        
+                this.sort();
+            },
+            orderBy: {
+                lastUpdate: function(venue) {
+
+                },
+                name: function(venue) {
+                   return venue.get('name'); 
+                }
+            }
+
+        });
+        return {
+            Venues: Venues
+        };
+    })();
+    // VIEWS
+    var Views = (function(){
+
+        var Application = Backbone.View.extend({
+            el: $('#venues-page'),
+            venuesStage: $('#venues-stage'),
+            events: {
+            },
+            initialize: function() {
+                _.bindAll(this, 'render', 'renderDetail', 'renderVenues');
+                this.render();
+                this.options.venuesCollection.on('render:detail', this.renderDetail);
+                this.options.venuesCollection.on('render:venues', this.renderVenues);
+                // console.log(this.$el);
+            },
+            render: function() {
+                this.options.venuesView = new Venues({ collection: this.options.venuesCollection});
+                this.options.mainActionsView = new MainActions({collection: this.options.venuesCollection});
+                this.options.venueDetailView = new VenueDetail({collection: this.options.venuesCollection});
+                this.options.addVenueModal= new AddVenueModal({collection: this.options.venuesCollection});
+                return this;
+            },
+            renderDetail: function(venue) {
+                 this.options.venueDetailView.render(venue);
+                 //this.venuesStage.html('hello');
+            },
+            renderVenues: function(venue) {
+                this.options.venuesView.$el.show();
+            }
+        });
+        var KeyboardShortcuts = Backbone.View.extend({
+            el: $(document),
+            events: {
+                'keyup': 'keyboardShortcuts'
+            },
+            initialize: function() {
+                _.bindAll(this, 'render', 'keyboardShortcuts');
+            },
+            keyboardShortcuts: function(e) {
+                // press 'A' => add a venue
+                if (e.which === 65) {
+                    this.options.venuesCollection.trigger('keyboard:add:venue');
+                }
+            },
+            render: function() {
+            }
+        });
+        var Venues = Backbone.View.extend({
+            el: $('#venues-list'),
+            showHiddenTemplate: _.template($("#venue-template").html()),
+            events: {
+            },
+            initialize: function() {
+                _.bindAll(this, 'render', 'showHidden', 'hide', 'addVenue');
+                this.collection.on('reset', this.render);           
+                this.collection.on('show:hidden', this.showHidden);
+                this.collection.on('render:detail', this.hide);
+                this.collection.on('add', this.addVenue);
+                // this.collection.on('reset', this.addVenue);
+                this.render();
+            },
+            render: function() {
+                var $el        = this.$el,
+                    collection = this.collection;
+                
+                this.collection.each(function(venue){
+                console.log(venue);
+                    var venueView = new Venue({model:venue, collection: collection});
+                    $el.append(venueView.$el);
+                });
+            },
+            reset: function() {
+                var $el        = this.$el,
+                    collection = this.collection;
+                
+                this.collection.each(function(venue){
+                    $el.append(venueView.$el);
+                });
+            },
+            addVenue: function(venue) {
+                var venueView = new Venue({model:venue, collection: this.collection});
+                 this.$el.prepend(venueView.$el);
+            },
+            hide: function() {
+               this.$el.hide(); 
+            },
+            showHidden: function() {
+            }
+        });
+        var Venue = Backbone.View.extend({
+            venueTemplate: _.template($("#venue-template").html()),
+            events: {
+                'click .venue-name a': 'renderDetail',
+                'click #remove-venue': 'removeVenue'
+
+            },
+            initialize: function() {
+                _.bindAll(this, 'render', 'renderDetail');
+                this.render();
+            },
+            render: function() {
+                this.$el.html(this.venueTemplate(this.model.toJSON()));
+                return this;
+            },
+            renderDetail: function() {
+                this.collection.trigger('render:detail', this.model);
+                return false;
+            },
+            removeVenue: function() {
+                // var confirmation = confirm("Are you sure");
+                console.log('delete');
+                // if (confirmation) {
+                    this.$el.fadeOut();
+                    this.model.destroy({
+                            success: function() { console.log('success'); },
+                            error: function() { console.log('error');}
+                        });
+                // } 
+            }
+        });
+        var VenueDetail = Backbone.View.extend({
+            el: $('#venue-detail'),
+            venueDetailTemplate: _.template($("#venue-detail-template").html()),
+            events: {
+                'click #tabs li': 'switchTab',
+                'click #return-to-venues-list': 'backToVenues'
+            },
+            initialize: function() {
+                _.bindAll(this, 'render', 'switchTab', 'backToVenues');
+            },
+            render: function(venue) {
+                this.$el.html(this.venueDetailTemplate(venue.toJSON())); 
+                this.$el.show();
+                return this;
+            },
+            switchTab: function(e) {
+                 this.$("#tabs li").removeClass('active');
+                 $(e.currentTarget).addClass("active");
+                 this.$(".tab_content").hide();
+                 var selectedTab = $(e.target).attr("href");
+                 this.$(selectedTab).show();
+                 return false;
+            },
+            backToVenues: function(e) {
+                this.$el.hide();
+                this.collection.trigger('render:venues');
+            }
+        });
+        var AddVenueModal = Backbone.View.extend({
+             el: $('#add-venue-modal'),
+         
+             events: {
+                'click #venue-add': 'addVenue'
+             },
+             initialize: function() {
+                 _.bindAll(this, 'render', 'show', 'addVenue');
+             },
+             show: function() {
+                this.$el.modal();    
+             },
+             addVenue: function() {
+                 var setter = {};
+                 this.$('input:text').each(function(){
+                     // Be careful in, this uses the input#id to set properties
+                     setter[$(this).attr('id')] = $(this).val();
+                     setter['thumbsup'] = 0;
+                     setter['thumbsdown'] = 0;
+                     setter['lastupdate'] = Math.round(+new Date()/1000);
+                 });
+                 var newVenue = new Models.Venue(setter);
+                 APP.venues.add(newVenue);
+                 newVenue.save(null, {
+                    error: function (argument) {
+                        console.log('not saved');
+                    },
+                    success: function (argument) {
+                        console.log('saved');
+                    }
+                 });
+
+                 // this.collection.add(setter); 
+             },
+             render: function() {
+                 this.$el.html(this.someTemplate());
+                 return this;
+             }
+         
+         });
+        var MainActions = Backbone.View.extend({
+            el: $('#venue-main-actions'),
+            mainActionsTemplate: _.template($("#venue-main-actions-template").html()),
+            events: {
+                'click #add-venue': 'addVenueModal',
+                'click #show-hidden-venues': 'showHidden',
+                'change #filter-venue-list': 'filterVenueList'
+            },
+            initialize: function() {
+                _.bindAll(this, 'render', 'addVenueModal', 'showHidden', 'filterVenueList');
+                this.collection.on('keyboard:add:venue', this.addVenueModal); 
+                this.render();
+            },
+            filterVenueList: function(e) {
+                var sortBy = this.$('option:selected').val();
+                
+                if (sortBy === 'name') {
+                    this.collection.orderByName();
+                } else if (sortBy === 'last-update') {
+                    this.collection.orderByLastUpdate();
+                }
+            },
+            addVenueModal: function(e) {
+                 application.options.addVenueModal.show();  
+                // var $addVenueModal = $('#add-venue-modal');
+                // $addVenueModal.modal();
+            },
+            showHidden: function(e) {
+                this.collection.trigger('show:hidden');
+            },
+            render: function() {
+                this.$el.html(this.mainActionsTemplate());
+                return this;
+            }
+        });
+
+        return {
+            Application: Application,
+            KeyboardShortcuts: KeyboardShortcuts
+
+        };
+    })();
+
+    // Initialize the App
+    var venues = new Collections.Venues();
+    var application = new Views.Application({ venuesCollection: venues });
+    var keyboardShortcuts = new Views.KeyboardShortcuts({venuesCollection: venues});
+
+    return {
+        Models: Models,
+        Collections: Collections,
+        Views: Views,
+        venues: venues
+    };
+
+
+})(jQuery);
