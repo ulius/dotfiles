@@ -267,6 +267,9 @@ nnoremap <leader>y :YRShow <cr>
 " }}}
 " Clam  ------------------------------------------------------------------ {{{
 nnoremap ! :Clam<space>
+vnoremap ! :ClamVisual<space>
+let g:clam_autoreturn = 1
+let g:clam_debug = 1
 " }}}
 " Taglist  ------------------------------------------------------------------ {{{
 " http://lucasoman.blogspot.com/2010/09/vim-php-taglist-and-ctags.html
