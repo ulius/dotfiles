@@ -10,5 +10,5 @@ vim/doc/command-t.txt
 vim/.netrwhist
 vim/.NERDTreeBookmarks
 vim/.tasks.taskpaper
-vim/tmp
+vim/tmp/*
 *docs/tags*
