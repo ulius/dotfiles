@@ -158,6 +158,9 @@ autocmd BufWinEnter *.* silent loadview
 nnoremap K :q<cr>
 " Uppercase entire word
 imap <c-u> <esc>viwUea
+" Show current file path with command
+command CurrentFilePath :echo expand('%:p')
+"
 " }}}
 " Backups  -------------------------------------------------------------------- {{{
 " taken from steve losh: https://github.com/sjl/dotfiles/blob/master/vim/vimrc

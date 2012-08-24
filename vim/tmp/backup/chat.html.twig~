@@ -1,8 +1,25 @@
-<div id="change-log">
-    <ul>
-        {% for i in 0 .. 15%}
-        <li>ulrich werner added venue 'club something' - 4/2/2012</li>
-        {% endfor %}
-    </ul>
+<div id="chat">
+    <div id="conversation">
+    <div id="chat-input">
+        <textarea id="data"></textarea>
+        <button id="datasend">send</button>
+    </div>
 </div>
-lafjsdlasjdf
+
+<script src="http://192.168.62.206:7000/socket.io/socket.io.js"></script>
+<script>
+    var socket = io.connect('http://192.168.62.206:7000');
+
+    // on connection to server, ask for user's name with an anonymous callback
+    socket.on('connect', function(){
+        // call the server-side function 'adduser' and send one parameter (value of prompt)
+        socket.emit('adduser', '{{ app.user }}', {{ app.session.get("activeEventId") }} );
+    });
+
+    socket.on('updatechat', function (username, data) {
+        $('#conversation').append('<div class="name">' + username + ':</div><div class="message">' + data + '</div>');
+        $('#conversation').scrollTop(100000000);
+    });
+</script>
+
+
