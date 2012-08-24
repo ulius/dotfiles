@@ -1,0 +1,4 @@
+<div id="filters">
+    <label for="search"></label>
+    <input type="text" id="search" name="search" />
+</div>

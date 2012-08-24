@@ -1,0 +1,28 @@
+    // on load of page
+    $(function(){
+        // when the client clicks SEND
+        $('#datasend').click( function() {
+       console.log('click');  
+            var message = $('#data').val();
+            if (message.length > 0) {
+                message = $.trim(message);
+                message = _.escape(message);
+                $('#data').val('');
+                $('#data').focus();
+                // tell server to execute 'sendchat' and send along one parameter
+                socket.emit('sendchat', message);
+            }
+        });
+
+        // when the client hits ENTER on their keyboard
+        $('#data').keypress(function(e) {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if(code == 13) {
+                e.preventDefault();
+                $('#datasend').click();
+            }
+        });
+    });
+
+    $('#conversation').scrollTop(100000000);
+

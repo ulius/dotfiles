@@ -1,23 +1,22 @@
 #chat {
     position: fixed;
-    bottom: 20px;
-    right: 5px;
-    // padding: 10px;
-    height: 50%;
+    bottom: 0;
+    right: 10px;
+    padding: 10px;
+    height: 51%;
     width: 225px;
-    background: #FFF;
-    border: 1px solid #e5e5e5;
     font-family: 'Segoe UI', Tahoma, Arial, Helvetica, Sans-Serif;
 
     #conversation {
         border: 1px solid #e5e5e5;
         overflow-y: scroll;
-        height: 80%;
+        height: 400px;
         top: 0px;
         bottom: 0px;
         -moz-border-radius: 2px;
         border-radius: 2px;
-        padding: 5px;
+
+    
 
         &::-webkit-scrollbar {
             width: 8px;
@@ -55,20 +54,13 @@
     }
 
     #chat-input {
-        height: 20%;
+        clear: both;
+        margin: 10px 0 0 0;
         textarea {
-        // this makes the textarea fit correctly inside its outer div
-        // http://stackoverflow.com/a/4156343
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
             resize: none;
-            height: 100%;
-            width: 100%;
+            width: 453px;
+            height: 50px;
             font-family: 'Segoe UI', Tahoma, Arial, Helvetica, Sans-Serif;
-        }
-        #datasend {
-            display: none;
         }
     }
 }

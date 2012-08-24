@@ -1,0 +1,8 @@
+<div id="change-log">
+    <ul>
+        {% for i in 0 .. 15%}
+        <li>ulrich werner added venue 'club something' - 4/2/2012</li>
+        {% endfor %}
+    </ul>
+</div>
+lafjsdlasjdf
