@@ -161,9 +161,9 @@ imap <c-u> <esc>viwUea
 " }}}
 " Backups  -------------------------------------------------------------------- {{{
 " taken from steve losh: https://github.com/sjl/dotfiles/blob/master/vim/vimrc
-set undodir=~/.vim/tmp/undo//     " undo files
-set backupdir=~/.vim/tmp/backup// " backups
-set directory=~/.vim/tmp/swap//   " swap files
+set undodir=~/.vim/tmp/undo/     " undo files
+set backupdir=~/.vim/tmp/backup/ " backups
+set directory=~/.vim/tmp/swap/   " swap files
 set backup                        " enable backups
 set noswapfile                    " It's 2012, Vim.
 " }}}
@@ -292,6 +292,9 @@ set nocindent smartindent
 " <C-R> <C-W> while in command-line mode inserts the text your cursor is currently over
 " :let NERDTreeBookmarks  shows the name of the variable
 " }}}
+" Normal mode ------------------------------------------------------------ {{{
+" <g-a> shows decimal, hex, and octal values of character cursor is on
+" }}}
 " All modes -------------------------------------------------------------------- {{{
 " set ve=all : allow 'virtual editing', allowing cursor to be positioned where there is no actual character
 " set ve=    : disallow 'virtual editing'; :help virtualedit for details
@@ -326,6 +329,9 @@ set nocindent smartindent
 " set nocindent smartindent
 " Moving ------------------------------------------------------------- {{{
 " ''   : move to previous position
+" }}}
+" Random ------------------------------------------------------------- {{{
+
 " }}}
 " TODO ------------------------------------------------------------- {{{
 " http://technotales.wordpress.com/2011/04/15/coffeescript-vim-and-pathogen/
