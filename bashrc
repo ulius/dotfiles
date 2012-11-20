@@ -22,8 +22,9 @@ source ~/dotfiles/lib/z/z.sh
 # Needed or vim has errors in TMUX -------------------------
 [ -z "$TMUX" ] && export TERM=xterm-256color
 alias tmux='tmux -2 -u'
-# alias vim='env TERM=xterm-256color vim'
-# alias tmux='TERM=xterm-256color tmux'
+
+# Avoid carpal tunnel in Rails -------------------------
+alias be='bundle exec'
 
 
 # Machine specific bash  ----------------------------------------------------------------------

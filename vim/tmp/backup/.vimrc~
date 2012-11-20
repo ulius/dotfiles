@@ -21,17 +21,12 @@ set ignorecase
 set smartcase
 nnoremap <leader><space> :noh<cr>
 
-"to stop from hitting the help menu
-" inoremap <F1> <ESC> 
-" nnoremap <F1> <ESC>
-" vnoremap <F1> <ESC>
-
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 set hidden
-set cursorline " highlight current line
+" set cursorline " highlight current line
 set hlsearch   " highlight searches
 set scrolloff=10 " allows me to see more text as im scrolling down
 
@@ -47,6 +42,9 @@ set history=1000
 " Filetypes -------------------------------------------------------------------- {{{
 au BufNewFile,BufRead *.twig set filetype=jinja
 au BufNewFile,BufRead *.less set filetype=less
+let g:ruby_path = '/usr/local/bin/ruby'
+"for ruby, autoindent with two spaces, always expand tabs
+au FileType ruby,haml,eruby,sass,cucumber,erb set ai sw=2 sts=2 et nocursorline 
 " }}}
 " Extras ----------------------------------------------------------------------- {{{
 " Quickly edit/reload the vimrc file
@@ -69,6 +67,7 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
 " }}}
 " Vimdiff ---------------------------------------------------------------------- {{{
 " vimdiff color scheme
@@ -148,6 +147,8 @@ nnoremap <leader>o zR
 nnoremap <leader>C zM
 " delete fold at cursor
 nnoremap <leader>d zd
+nnoremap <leader>v $zf%
+
 
 " save and restore folds when a file is closed and re-opened
 autocmd BufWinLeave *.* mkview
@@ -158,8 +159,8 @@ autocmd BufWinEnter *.* silent loadview
 nnoremap K :q<cr>
 " Uppercase entire word
 imap <c-u> <esc>viwUea
-
-command CurrentFilePath :echo expand('%:p')
+" Show current file path with command
+command! CurrentFilePath :echo expand('%:p')
 "
 " }}}
 " Backups  -------------------------------------------------------------------- {{{
@@ -179,6 +180,18 @@ nnoremap _ht :set ft=html<CR>
 nnoremap _ji :set ft=jinja<CR>
 nnoremap _le :set ft=markdown<CR>
 nnoremap _d  :set ft=diff<CR>
+nnoremap _r  :set ft=ruby<CR>
+" " }}}
+" Auto groups {{{
+augroup project_rails
+    autocmd!
+    au FileType ruby,eruby call RailsShortcuts()
+augroup END
+
+augroup project_symfony2
+    autocmd!
+    au FileType php call Symfony2Shortcuts()
+augroup END
 " " }}}
 
 " Plugins 
@@ -209,7 +222,7 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1 
 " }}}
 " Command-T -------------------------------------------------------------------- {{{
-function! ShowRoutes()
+function! Symfony2Routes()
   " Requires 'scratch' plugin
   :topleft 50 :split __Routes__
   " Make sure Vim doesn't write __Routes__ as a file
@@ -225,17 +238,53 @@ function! ShowRoutes()
   " Delete empty trailing line
   :normal dd
 endfunction
-map <leader>gr :topleft :split Resources/config/routing.yml<cr>
-map <leader>gR :call ShowRoutes()<cr>
-map <leader>gv :CommandTFlush<cr>\|:CommandT Resources/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT Controller<cr>
-map <leader>ge :CommandTFlush<cr>\|:CommandT Entity<cr>
-map <leader>gE :CommandTFlush<cr>\|:CommandT Repository<cr>
-map <leader>gj :CommandTFlush<cr>\|:CommandT Resources/public/js<cr>
-map <leader>gs :CommandTFlush<cr>\|:CommandT Resources/public/css<cr>
-map <leader>gt :CommandTFlush<cr>\|:CommandT Tests<cr>
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+
+function! RailsRoutes()
+  " Requires 'scratch' plugin
+  :topleft 50 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! rake routes
+  " Size window to number of lines (1 plus rake output length)
+  :execute ":normal " . line("$") . "_ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+
+function! Symfony2Shortcuts()
+    map <leader>gr :topleft :split Resources/config/routing.yml<cr>
+    map <leader>gR :call Symfony2Routes()<cr>
+    map <leader>gv :CommandTFlush<cr>\|:CommandT Resources/views<cr>
+    map <leader>gc :CommandTFlush<cr>\|:CommandT Controller<cr>
+    map <leader>ge :CommandTFlush<cr>\|:CommandT Entity<cr>
+    map <leader>gE :CommandTFlush<cr>\|:CommandT Repository<cr>
+    map <leader>gj :CommandTFlush<cr>\|:CommandT Resources/public/js<cr>
+    map <leader>gjt :CommandTFlush<cr>\|:CommandT Resources/jst<cr>
+    map <leader>gs :CommandTFlush<cr>\|:CommandT Resources/public/css<cr>
+    map <leader>gt :CommandTFlush<cr>\|:CommandT Tests<cr>
+    map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+    map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+endfunction
+
+function! RailsShortcuts()
+    map <leader>gr :vertical :split config/routes.rb <cr>
+    map <leader>gR :call RailsRoutes()<cr>
+    map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
+    map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+    map <leader>ge :CommandTFlush<cr>\|:CommandT app/models<cr>
+    map <leader>gj :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
+    " map <leader>gjt :CommandTFlush<cr>\|:CommandT <cr>
+    map <leader>gs :CommandTFlush<cr>\|:CommandT app/assets/stylesheets<cr>
+    map <leader>gt :CommandTFlush<cr>\|:CommandT spec/<cr>
+    map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+    map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+endfunction
+
 " }}}
 " Tagbar ----------------------------------------------------------------------- {{{
 nnoremap <silent> <F9> :TagbarToggle<CR> 
@@ -337,7 +386,12 @@ set nocindent smartindent
 " ''   : move to previous position
 " }}}
 " Random ------------------------------------------------------------- {{{
-
+" Run cmd line after every save:
+" :autocmd BufWritePost * !run_tests.sh <afile>
+" }}}
+" Tabs ------------------------------------------------------------- {{{
+" To show the last file that set variables, for example:
+" :verbose set tabstop sw softtabstop expandtab ?
 " }}}
 " TODO ------------------------------------------------------------- {{{
 " http://technotales.wordpress.com/2011/04/15/coffeescript-vim-and-pathogen/
