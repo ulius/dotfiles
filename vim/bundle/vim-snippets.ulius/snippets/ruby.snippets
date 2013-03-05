@@ -1,0 +1,19 @@
+# Class
+snippet respond_to
+	respond_to do |format|
+	  format.html
+	  format.json { render :json => @${1:event} }
+	end
+snippet do
+	${1:thing} do
+	  ${2:thing}
+	end
+snippet describe
+	describe "${1:thing}" do
+	  ${2:thing}
+	end
+snippet class
+	class ${1:Klass}
+	  ${2:thing}
+	end
+

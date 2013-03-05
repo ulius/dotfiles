@@ -18,6 +18,9 @@
 'NERDTreeWinPos'	NERD_tree.txt	/*'NERDTreeWinPos'*
 'NERDTreeWinSize'	NERD_tree.txt	/*'NERDTreeWinSize'*
 'loaded_nerd_tree'	NERD_tree.txt	/*'loaded_nerd_tree'*
+,b	camelcasemotion.txt	/*,b*
+,e	camelcasemotion.txt	/*,e*
+,w	camelcasemotion.txt	/*,w*
 :CommandT	command-t.txt	/*:CommandT*
 :CommandTBuffer	command-t.txt	/*:CommandTBuffer*
 :CommandTFlush	command-t.txt	/*:CommandTFlush*
@@ -105,6 +108,17 @@ b:match_tail	matchit.txt	/*b:match_tail*
 b:match_wholeBR	matchit.txt	/*b:match_wholeBR*
 b:match_word	matchit.txt	/*b:match_word*
 b:match_words	matchit.txt	/*b:match_words*
+camelcasemotion-configuration	camelcasemotion.txt	/*camelcasemotion-configuration*
+camelcasemotion-dependencies	camelcasemotion.txt	/*camelcasemotion-dependencies*
+camelcasemotion-description	camelcasemotion.txt	/*camelcasemotion-description*
+camelcasemotion-history	camelcasemotion.txt	/*camelcasemotion-history*
+camelcasemotion-ideas	camelcasemotion.txt	/*camelcasemotion-ideas*
+camelcasemotion-installation	camelcasemotion.txt	/*camelcasemotion-installation*
+camelcasemotion-known-problems	camelcasemotion.txt	/*camelcasemotion-known-problems*
+camelcasemotion-todo	camelcasemotion.txt	/*camelcasemotion-todo*
+camelcasemotion-usage	camelcasemotion.txt	/*camelcasemotion-usage*
+camelcasemotion.txt	camelcasemotion.txt	/*camelcasemotion.txt*
+camelcasemotion.vim	camelcasemotion.txt	/*camelcasemotion.vim*
 command-t	command-t.txt	/*command-t*
 command-t-authors	command-t.txt	/*command-t-authors*
 command-t-commands	command-t.txt	/*command-t-commands*

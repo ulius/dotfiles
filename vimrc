@@ -1,9 +1,9 @@
+" vim: set foldmarker={,} foldlevel=1 foldmethod=marker
 " .vimrc
 " Author: Ulrich Werner <ulrichwern@gmail.com>
-" vim:fdm=marker
 
 " Main
-" Basic setup ------------------------------------------------------------------ {{{
+" Basic setup ------------------------------------------------------------------ {
 set t_Co=256
 syntax on
 colorscheme zenburn
@@ -32,24 +32,32 @@ set scrolloff=10 " allows me to see more text as im scrolling down
 
 " remap <esc> to kj    
 imap kj <ESC>
-map ,w :w <CR>
-map ,W :wq <CR>
+" Saving
+map <leader>1 :w <CR> 
+map <leader>3 :wq <CR>
+map <leader>% :q! <CR>
+
 set foldmethod=manual
 
-set history=1000
+set history=10000
+" set textwidth=80
 
-" }}}
-" Filetypes -------------------------------------------------------------------- {{{
+" }
+" Filetypes -------------------------------------------------------------------- {
 au BufNewFile,BufRead *.twig set filetype=jinja
 au BufNewFile,BufRead *.less set filetype=less
+au BufNewFile,BufRead *.ejs set filetype=javascript
 let g:ruby_path = '/usr/local/bin/ruby'
 "for ruby, autoindent with two spaces, always expand tabs
 au FileType ruby,haml,eruby,sass,cucumber,erb set ai sw=2 sts=2 et nocursorline 
-" }}}
-" Extras ----------------------------------------------------------------------- {{{
+au FileType coffee set ai sw=2 sts=2 et nocursorline 
+" }
+" Extras ----------------------------------------------------------------------- {
 " Quickly edit/reload the vimrc file
 nmap  <leader>ev :vs $MYVIMRC<CR>
 nmap  <leader>sv :so $MYVIMRC<CR>
+" edit personal snipmate snippets
+nmap  <leader>eS :NERDTree ~/dotfiles/vim/bundle/vim-snippets.ulius/snippets <CR>
 
 " http://stackoverflow.com/q/526858
 set wildmode=longest,list,full
@@ -68,13 +76,16 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-" }}}
-" Vimdiff ---------------------------------------------------------------------- {{{
+" }
+" Vimdiff ---------------------------------------------------------------------- {
 " vimdiff color scheme
  highlight DiffChange cterm=none ctermfg=black ctermbg=LightGreen gui=none guifg=bg guibg=LightGreen
  highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=Red
-" }}}
-" Editing/Renaming Files ------------------------------------------------------- {{{
+" }
+" change zenburn line number bg color
+highlight LineNr ctermbg=237
+" }
+" Editing/Renaming Files ------------------------------------------------------- {
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -100,8 +111,8 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-" }}}
-" Status Line ------------------------------------------------------------------ {{{
+" }
+" Status Line ------------------------------------------------------------------ {
         set laststatus=2                             " always show statusbar  
         set statusline=  
         set statusline+=%-10.3n\                     " buffer number  
@@ -113,8 +124,8 @@ nnoremap <c-l> <c-w>l
         set statusline+=0x%-8B                       " character value  
         set statusline+=%-14(%l,%c%V%)               " line, character  
         set statusline+=%<%P                         " file position  
-"}}}  
-" Folding ---------------------------------------------------------------------- {{{
+"}  
+" Folding ---------------------------------------------------------------------- {
 fu! CustomFoldText()
     "get first non-blank line
     let fs = v:foldstart
@@ -153,36 +164,48 @@ nnoremap <leader>v $zf%
 " save and restore folds when a file is closed and re-opened
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
-" }}}
-" Custom Mappings -------------------------------------------------------------- {{{
+" }
+" Custom Mappings -------------------------------------------------------------- {
 " Kill window
 nnoremap K :q<cr>
 " Uppercase entire word
 imap <c-u> <esc>viwUea
 " Show current file path with command
 command! CurrentFilePath :echo expand('%:p')
+" Give me emacs/readline in command mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-d> <Del>
+" these are alt+b and alt+f. I used insert mode and ctrl+v to find out 
+" what my terminal was sending vim:
+cnoremap b <C-Left>
+cnoremap f <C-Right>
 "
-" }}}
-" Backups  -------------------------------------------------------------------- {{{
+" }
+" Backups  -------------------------------------------------------------------- {
 " taken from steve losh: https://github.com/sjl/dotfiles/blob/master/vim/vimrc
 set undodir=~/.vim/tmp/undo/     " undo files
 set backupdir=~/.vim/tmp/backup/ " backups
 set directory=~/.vim/tmp/swap/   " swap files
 set backup                        " enable backups
 set noswapfile                    " It's 2012, Vim.
-" }}}
-" Completion " -------------------------------------------------------------------- {{{
+" }
+" Completion " -------------------------------------------------------------------- {
 " inoremap <c-f> <c-x><c-o>
-" }}}
-" Easy filetype switching {{{
+" }
+" Easy filetype switching {
 nnoremap _js :set ft=javascript<CR>
 nnoremap _ht :set ft=html<CR>
 nnoremap _ji :set ft=jinja<CR>
 nnoremap _le :set ft=markdown<CR>
 nnoremap _d  :set ft=diff<CR>
 nnoremap _r  :set ft=ruby<CR>
-" " }}}
-" Auto groups {{{
+" " }
+" Auto groups {
 augroup project_rails
     autocmd!
     au FileType ruby,eruby call RailsShortcuts()
@@ -192,10 +215,10 @@ augroup project_symfony2
     autocmd!
     au FileType php call Symfony2Shortcuts()
 augroup END
-" " }}}
+" " }
 
 " Plugins 
-" NERDTree --------------------------------------------------------------------- {{{
+" NERDTree --------------------------------------------------------------------- {
 map <F1> :NERDTreeToggle  <CR>
 "map <F2> :NERDTreeFind <CR>
 let NERDTreeShowBookmarks=1
@@ -213,15 +236,15 @@ function! s:CloseIfOnlyNerdTreeLeft()
     endif
   endif
 endfunction
-"}}}
-" miniBufExpl ------------------------------------------------------------------ {{{
+"}
+" miniBufExpl ------------------------------------------------------------------ {
 let g:miniBufExplorerMoreThanOne = 2
 "let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1 
-" }}}
-" Command-T -------------------------------------------------------------------- {{{
+" }
+" Command-T -------------------------------------------------------------------- {
 function! Symfony2Routes()
   " Requires 'scratch' plugin
   :topleft 50 :split __Routes__
@@ -256,6 +279,9 @@ function! RailsRoutes()
   :normal dd
 endfunction
 
+    map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+    map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+
 function! Symfony2Shortcuts()
     map <leader>gr :topleft :split Resources/config/routing.yml<cr>
     map <leader>gR :call Symfony2Routes()<cr>
@@ -283,17 +309,19 @@ function! RailsShortcuts()
     map <leader>gt :CommandTFlush<cr>\|:CommandT spec/<cr>
     map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
     map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+    map <leader>t :!script/test % <cr>
+    map <leader>T :!script/test <cr>
 endfunction
 
-" }}}
-" Tagbar ----------------------------------------------------------------------- {{{
+" }
+" Tagbar ----------------------------------------------------------------------- {
 nnoremap <silent> <F9> :TagbarToggle<CR> 
-"}}}
-" Taskpaper -------------------------------------------------------------------- {{{
+"}
+" Taskpaper -------------------------------------------------------------------- {
 map <F2> :sp ~/dotfiles/vim/.tasks.taskpaper<cr>
 let g:task_paper_date_format = "%Y-%m-%d %H:%M"
-" }}}
-" Syntastic -------------------------------------------------------------------- {{{
+" }
+" Syntastic -------------------------------------------------------------------- {
 " passive mode lets me toggle syntastic on, instead of it being run on file save
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
 " syntastic uses vim's location lists; use :lnext and :lprev to cycle through errors
@@ -303,59 +331,60 @@ nnoremap <leader>m :lprev <CR>
 nnoremap <leader>ss :SyntasticCheck <CR>
 nnoremap <leader>st :SyntasticToggleMode<cr>\|:redraw!<cr>
 nnoremap <leader>sE :Errors <cr>
-" }}}
-" Snipmate  -------------------------------------------------------------------- {{{
+" }
+" Snipmate  -------------------------------------------------------------------- {
 au BufRead,BufNewFile *.js set filetype=javascript
-" }}}
-" JsBeautify  ------------------------------------------------------------------ {{{
+" }
+" JsBeautify  ------------------------------------------------------------------ {
 nnoremap <leader>ff :call g:Jsbeautify()<cr>
-" }}}
-" Tabular  ------------------------------------------------------------------ {{{
+" }
+" Tabular  ------------------------------------------------------------------ {
 nmap <leader>z: :Tab /:\zs <cr>
-nmap <leader>z= :Tab /=\zs <cr>
-" }}}
-" YankRing  ------------------------------------------------------------------ {{{
+nmap <leader>z= :Tab /= <cr>
+nmap <leader>z=> :Tab /=> <cr>
+" }
+" YankRing  ------------------------------------------------------------------ {
 nnoremap <leader>y :YRShow <cr>
-" }}}
-" Clam  ------------------------------------------------------------------ {{{
+" }
+" Clam  ------------------------------------------------------------------ {
 nnoremap ! :Clam<space>
 vnoremap ! :ClamVisual<space>
 let g:clam_autoreturn = 1
 let g:clam_debug = 1
-" }}}
-" Taglist  ------------------------------------------------------------------ {{{
+" }
+" Taglist  ------------------------------------------------------------------ {
 " http://lucasoman.blogspot.com/2010/09/vim-php-taglist-and-ctags.html
-" }}}
-" Powerline  ------------------------------------------------------------------ {{{
+" }
+" Powerline  ------------------------------------------------------------------ {
 let g:Powerline_symbols = 'fancy'
-call Pl#Theme#InsertSegment('fileformat','after','filename')
-" }}}
+" call Pl#Theme#InsertSegment('fileformat','after','filename')
+" }
 
 " Testing & Linting
-" PHP -------------------------------------------------------------------------- {{{
+" PHP -------------------------------------------------------------------------- {
 " Checks current file for php parser errors
 " noremap <C-L> :!php -l %<CR>
-map <leader>q :w <cr> :Clam php % <cr>
-" }}}
-" Javascript ------------------------------------------------------------------- {{{
+map <leader>q :w \| :Clam ruby % <CR>
+" }
+" Javascript ------------------------------------------------------------------- {
 set nocindent smartindent
-"}}}
+"}
 
 " Vim Tips 
-" Command-line mode ------------------------------------------------------------ {{{
+" Command-line mode ------------------------------------------------------------ {
 " http://stackoverflow.com/a/1220118 : lots of good tips
 " <C-R> <C-W> while in command-line mode inserts the text your cursor is currently over
 " :let NERDTreeBookmarks  shows the name of the variable
-" }}}
-" Normal mode ------------------------------------------------------------ {{{
+" }
+" Normal mode ------------------------------------------------------------ {
 " <g-a> shows decimal, hex, and octal values of character cursor is on
-" }}}
-" All modes -------------------------------------------------------------------- {{{
+" }
+" All modes -------------------------------------------------------------------- {
 " set ve=all : allow 'virtual editing', allowing cursor to be positioned where there is no actual character
 " set ve=    : disallow 'virtual editing'; :help virtualedit for details
 " :!r {some command} : executes a bash command and read the output into vim
-" }}}
-" Folding ---------------------------------------------------------------------- {{{
+" }
+" Folding ---------------------------------------------------------------------- {
 " zf#j creates a fold from the cursor down # lines.
 " zf/string creates a fold from the cursor to string .
 " zj moves the cursor to the next fold.
@@ -372,28 +401,32 @@ set nocindent smartindent
 " ]z move to end of open fold.
 " ==============
 " zfit fold an html node
-" }}}
-" Current Filename ------------------------------------------------------------- {{{
+" }
+" Current Filename ------------------------------------------------------------- {
 " :echo expand("%:p")
-" }}}
-" Book about Vimscript ------------------------------------------------------------- {{{
+" }
+" Book about Vimscript ------------------------------------------------------------- {
 " http://learnvimscriptthehardway.stevelosh.com/chapters/21.html
-" }}}
+" }
 " so javascript indents after return
 "  http://stackoverflow.com/a/5326852
 " set nocindent smartindent
-" Moving ------------------------------------------------------------- {{{
+" Moving ------------------------------------------------------------- {
 " ''   : move to previous position
-" }}}
-" Random ------------------------------------------------------------- {{{
+" }
+" Random ------------------------------------------------------------- {
 " Run cmd line after every save:
 " :autocmd BufWritePost * !run_tests.sh <afile>
-" }}}
-" Tabs ------------------------------------------------------------- {{{
+" }
+" Tabs ------------------------------------------------------------- {
 " To show the last file that set variables, for example:
 " :verbose set tabstop sw softtabstop expandtab ?
-" }}}
-" TODO ------------------------------------------------------------- {{{
+" 
+" To see what your terminal is sending when you press a key, switch to insert
+" mode, press Ctrl+V, then the key
+" http://unix.stackexchange.com/a/14790
+" }
+" TODO ------------------------------------------------------------- {
 " http://technotales.wordpress.com/2011/04/15/coffeescript-vim-and-pathogen/
-" }}}
+" }
 " 

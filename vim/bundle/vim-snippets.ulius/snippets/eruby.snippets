@@ -1,0 +1,36 @@
+snippet link_to
+	<%= link_to '${1:text}', ${2:path_name} %>
+snippet %
+	<% ${1:text} %>
+snippet %=
+	<%= ${1:text} %>
+snippet if
+	<% if ${1:text} %>
+	<% end %>
+snippet form_for
+	<%= form_for([@event, @contact]) do |f| %>
+	  <%= f.label :name %> <br>
+	  <%= f.text_field :name %> <br>
+
+	  <%= f.submit 'Save', {class: 'btn btn-success'} %>
+	  <%=  link_to 'Cancel', event_budget_items_path(@event) %>
+	<% end %>
+
+snippet render
+	<%= render '${1:view}' %>
+snippet table
+	<table>
+	  <thead>
+		<tr>
+		  <th>
+			<td></td>
+		  </th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+		  <td></td>
+		</tr>
+	  </tbody>
+	</table>
+
