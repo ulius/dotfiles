@@ -3,12 +3,29 @@
 " Author: Ulrich Werner <ulrichwern@gmail.com>
 
 " Main
+" Vundle  ------------------------------------------------------------------ {"{
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+Bundle 'kien/ctrlp.vim'
+Bundle 'sjl/clam.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'honza/snipmate-snippets'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+
+Bundle 'ervandew/supertab'
+Bundle 'majutsushi/tagbar'
+Bundle 'vim-scripts/tComment'
+Bundle 'tomtom/tlib_vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'garbas/vim-snipmate.git'
+
+" }"}
 " Basic setup ------------------------------------------------------------------ {
 set t_Co=256
 syntax on
 colorscheme zenburn
-call pathogen#helptags()
-call pathogen#infect()
 filetype indent on
 filetype plugin on
 set ruler
@@ -29,6 +46,12 @@ set hidden
 " set cursorline " highlight current line
 set hlsearch   " highlight searches
 set scrolloff=10 " allows me to see more text as im scrolling down
+set nu
+
+" resize windows left and right
+nnoremap <silent> <Left> :vertical resize +5 <cr>
+nnoremap <silent> <Right> :vertical resize -5 <cr>
+
 
 " remap <esc> to kj    
 imap kj <ESC>
@@ -300,16 +323,21 @@ endfunction
 function! RailsShortcuts()
     map <leader>gr :vertical :split config/routes.rb <cr>
     map <leader>gR :call RailsRoutes()<cr>
-    map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-    map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-    map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-    map <leader>gj :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
-    " map <leader>gjt :CommandTFlush<cr>\|:CommandT <cr>
-    map <leader>gs :CommandTFlush<cr>\|:CommandT app/assets/stylesheets<cr>
-    map <leader>gt :CommandTFlush<cr>\|:CommandT spec/<cr>
-    map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-    map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-    map <leader>t :!script/test <cr>
+    map <leader>gv :CtrlP app/views<cr>
+    map <leader>gh :CtrlP app/helpers<cr>
+    map <leader>gc :CtrlP app/controllers<cr>
+    map <leader>gm :CtrlP app/models<cr>
+    map <leader>gS :CtrlP app/services<cr>
+    map <leader>gj :CtrlP app/assets/javascripts<cr>
+    map <leader>gs :CtrlP app/assets/stylesheets<cr>
+    map <leader>gt :CtrlP spec/<cr>
+    map <leader>gf :CtrlP spec/factories<cr>
+    map <leader>f :CtrlP <cr>
+    map <leader>F :CtrlP  %%<cr>
+
+    map <leader>t :!script/test % <cr>
+    map <leader>T :!script/test <cr>
+    map <leader>s :vertical :split db/schema.rb <cr>
 endfunction
 
 " }
@@ -429,3 +457,13 @@ set nocindent smartindent
 " http://technotales.wordpress.com/2011/04/15/coffeescript-vim-and-pathogen/
 " }
 " 
+"If there's a .vimlocal file automatically source it
+function! SourceVimLocal()
+    if filereadable(".vimlocal")
+        source .vimlocal
+    endif
+endfunction
+call SourceVimLocal()
+
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_max_height = '40'

@@ -8,12 +8,24 @@ snippet do
 	${1:thing} do
 	  ${2:thing}
 	end
+snippet class
+	class ${1:Klass}
+	  ${2:thing}
+	end
+
+# rspec
+snippet it
+	it "${1:has}" do
+	  ${2:this}
+	end
+
 snippet describe
 	describe "${1:thing}" do
 	  ${2:thing}
 	end
-snippet class
-	class ${1:Klass}
+
+snippet context
+	context "${1:thing}" do
 	  ${2:thing}
 	end
 

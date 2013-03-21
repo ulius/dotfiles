@@ -72,6 +72,3 @@
 [submodule "vim/bundle/clam"]
 	path = vim/bundle/clam
 	url = http://github.com/sjl/clam.vim.git
-[submodule "vim/bundle/vim-powerline"]
-	path = vim/bundle/vim-powerline
-	url = http://github.com/Lokaltog/vim-powerline.git
