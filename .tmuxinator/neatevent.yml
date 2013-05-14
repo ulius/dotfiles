@@ -1,0 +1,15 @@
+# ~/.tmuxinator/neatevent.yml
+# you can make as many tabs as you wish...
+
+project_name: Neatevent
+project_root: /var/www/html/neatevent
+socket_name: foo # Not needed.  Remove to use default socket
+rvm: 2.0.0p0@neatevent 
+# pre: sudo /etc/rc.d/mysqld start
+tabs:
+  - view: vi
+  - controller: vi 
+  - model: vi 
+  - console: rails c
+  - psql: rails db
+  - logs: tail -f log/development

@@ -6,6 +6,10 @@
 " Vundle  ------------------------------------------------------------------ {"{
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+" My Bundles
+Bundle 'vim-snippets.ulius'
+Bundle 'powerline'
+" Github bundlesk
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'sjl/clam.vim'
@@ -17,8 +21,21 @@ Bundle 'majutsushi/tagbar'
 Bundle 'vim-scripts/tComment'
 Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'garbas/vim-snipmate.git'
+Bundle 'tsaleh/vim-matchit'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'mileszs/ack.vim'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'briancollins/vim-jst'
+Bundle 'pangloss/vim-javascript'
+Bundle 'nono/vim-handlebars'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
+Bundle 'walm/jshint.vim'
+Bundle 'benmills/vimux'
+Bundle 'pgr0ss/vimux-ruby-test'
+Bundle 'othree/javascript-libraries-syntax.vim'
+Bundle 'jnwhiteh/vim-golang'
 
 " }"}
 " Basic setup ------------------------------------------------------------------ {
@@ -50,6 +67,8 @@ set nu
 " resize windows left and right
 nnoremap <silent> <Left> :vertical resize +5 <cr>
 nnoremap <silent> <Right> :vertical resize -5 <cr>
+nnoremap <silent> <Up> :resize +5 <cr>
+nnoremap <silent> <Down> :resize -5 <cr>
 
 
 " remap <esc> to kj    
@@ -68,11 +87,13 @@ set history=10000
 " Filetypes -------------------------------------------------------------------- {
 au BufNewFile,BufRead *.twig set filetype=jinja
 au BufNewFile,BufRead *.less set filetype=less
-au BufNewFile,BufRead *.ejs set filetype=javascript
+au BufNewFile,BufRead *.ejs set filetype=jst
 let g:ruby_path = '/usr/local/bin/ruby'
 "for ruby, autoindent with two spaces, always expand tabs
 au FileType ruby,haml,eruby,sass,cucumber,erb set ai sw=2 sts=2 et nocursorline 
+au FileType sql set ai sw=2 sts=2 et nocursorline 
 au FileType coffee set ai sw=2 sts=2 et nocursorline 
+au FileType javascript set ai sw=2 sts=2 et nocursorline 
 " }
 " Extras ----------------------------------------------------------------------- {
 " Quickly edit/reload the vimrc file
@@ -189,7 +210,6 @@ autocmd BufWinEnter *.* silent loadview
 " }
 " Custom Mappings -------------------------------------------------------------- {
 " Kill window
-nnoremap K :q<cr>
 " Uppercase entire word
 imap <c-u> <esc>viwUea
 " Show current file path with command
@@ -220,9 +240,9 @@ set noswapfile                    " It's 2012, Vim.
 " inoremap <c-f> <c-x><c-o>
 " }
 " Easy filetype switching {
-nnoremap _js :set ft=javascript<CR>
+nnoremap _j :set ft=javascript<CR>
+nnoremap _c :set ft=coffee<CR>
 nnoremap _ht :set ft=html<CR>
-nnoremap _ji :set ft=jinja<CR>
 nnoremap _le :set ft=markdown<CR>
 nnoremap _d  :set ft=diff<CR>
 nnoremap _r  :set ft=ruby<CR>
@@ -334,8 +354,12 @@ function! RailsShortcuts()
     map <leader>f :CtrlP <cr>
     map <leader>F :CtrlP  %%<cr>
 
-    map <leader>t :!script/test % <cr>
-    map <leader>T :!script/test <cr>
+    let g:vimux_ruby_cmd_unit_test = "zeus rspec"
+    let g:vimux_ruby_cmd_all_tests = "zeus rspec"
+    let g:vimux_ruby_cmd_context = "zeus rspec"
+    map <leader>t :RunRubyFocusedTest <cr>
+    map <leader>z :RunRubyFocusedContext <cr>
+    map <leader>T :RunAllRubyTests <cr>
     map <leader>s :vertical :split db/schema.rb <cr>
 endfunction
 
@@ -383,7 +407,18 @@ let g:clam_debug = 1
 " }
 " Powerline  ------------------------------------------------------------------ {
 let g:Powerline_symbols = 'fancy'
-" call Pl#Theme#InsertSegment('fileformat','after','filename')
+" }
+" Ack  ------------------------------------------------------------------ {
+map <leader>a :Ack 
+" }
+" Vimux  ------------------------------------------------------------------ {
+" Necessary to avoid this: https://github.com/benmills/vimux/issues/14
+ruby << EOF
+class Object
+  def flush; end unless Object.new.respond_to?(:flush)
+end
+EOF
+let g:VimuxOrientation = "h"
 " }
 
 " Testing & Linting

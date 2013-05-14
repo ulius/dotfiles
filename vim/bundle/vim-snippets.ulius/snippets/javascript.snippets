@@ -53,4 +53,18 @@ snippet clos
 	var ${1:Name} = (function(){
 
 	})();
+# function
+snippet func
+	function() {
+		${1:Name}
+	}
+# angular ctrl
+snippet ctrl
+	function ${1:Name}Ctrl($scope) {
+	}
+# angular $scope function
+snippet sf
+	$scope.${1:name} = function(${2:param}) {
+		${3:stuff}
+	};
 
