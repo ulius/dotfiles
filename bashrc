@@ -10,6 +10,7 @@ fi
 export PATH=$PATH:/usr/local/bin/:/usr/bin
 export PATH=$PATH:~/dotfiles/bin
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/src/racket-5.3.4/bin
 export NODE_PATH=$NODE_PATH:/usr/local/src/doctorjs/lib/jsctags:/usr/local/lib/node_modules
 export EDITOR=vim
 export LANG=en_US.UTF-8 # so pstree displays correctly
@@ -31,7 +32,7 @@ alias be='bundle exec'
 # Less needs to see color
 export LESS=-RFX
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator

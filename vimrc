@@ -9,7 +9,7 @@ call vundle#rc()
 " My Bundles
 Bundle 'vim-snippets.ulius'
 Bundle 'powerline'
-" Github bundlesk
+" Github bundles
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'sjl/clam.vim'
@@ -358,7 +358,7 @@ function! RailsShortcuts()
     let g:vimux_ruby_cmd_all_tests = "zeus rspec"
     let g:vimux_ruby_cmd_context = "zeus rspec"
     map <leader>t :RunRubyFocusedTest <cr>
-    map <leader>z :RunRubyFocusedContext <cr>
+    map <leader>y :RunRubyFocusedContext <cr>
     map <leader>T :RunAllRubyTests <cr>
     map <leader>s :vertical :split db/schema.rb <cr>
 endfunction
@@ -392,9 +392,6 @@ nnoremap <leader>ff :call g:Jsbeautify()<cr>
 nmap <leader>z: :Tab /:\zs <cr>
 nmap <leader>z= :Tab /= <cr>
 nmap <leader>z=> :Tab /=> <cr>
-" }
-" YankRing  ------------------------------------------------------------------ {
-nnoremap <leader>y :YRShow <cr>
 " }
 " Clam  ------------------------------------------------------------------ {
 nnoremap ! :Clam<space>
