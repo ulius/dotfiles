@@ -15,6 +15,7 @@ export NODE_PATH=$NODE_PATH:/usr/local/src/doctorjs/lib/jsctags:/usr/local/lib/n
 export EDITOR=vim
 export LANG=en_US.UTF-8 # so pstree displays correctly
 export LC_ALL=en_US.UTF-8
+export PATH=$PATH:/home/uli/play/play-2.2.0-M1
 
 alias j='z'
 

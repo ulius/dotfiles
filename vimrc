@@ -17,7 +17,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'honza/snipmate-snippets'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'ervandew/supertab'
-Bundle 'majutsushi/tagbar'
 Bundle 'vim-scripts/tComment'
 Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-fugitive'
@@ -36,6 +35,7 @@ Bundle 'benmills/vimux'
 Bundle 'pgr0ss/vimux-ruby-test'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'majutsushi/tagbar'
 
 " }"}
 " Basic setup ------------------------------------------------------------------ {
@@ -94,6 +94,7 @@ au FileType ruby,haml,eruby,sass,cucumber,erb set ai sw=2 sts=2 et nocursorline
 au FileType sql set ai sw=2 sts=2 et nocursorline 
 au FileType coffee set ai sw=2 sts=2 et nocursorline 
 au FileType javascript set ai sw=2 sts=2 et nocursorline 
+au BufNewFile,BufRead Gemfile set filetype=ruby
 " }
 " Extras ----------------------------------------------------------------------- {
 " Quickly edit/reload the vimrc file
@@ -351,6 +352,8 @@ function! RailsShortcuts()
     map <leader>gs :CtrlP app/assets/stylesheets<cr>
     map <leader>gt :CtrlP spec/<cr>
     map <leader>gf :CtrlP spec/factories<cr>
+    map <leader>gd :sp db/structure.sql<cr>
+    map <leader>gD :sp db/schema.rb<cr>
     map <leader>f :CtrlP <cr>
     map <leader>F :CtrlP  %%<cr>
 
@@ -365,7 +368,7 @@ endfunction
 
 " }
 " Tagbar ----------------------------------------------------------------------- {
-nnoremap <silent> <F9> :TagbarToggle<CR> 
+" nnoremap <silent> <F9> :TagbarToggle<CR> 
 "}
 " Taskpaper -------------------------------------------------------------------- {
 map <F2> :sp ~/dotfiles/vim/.tasks.taskpaper<cr>
@@ -415,7 +418,7 @@ class Object
   def flush; end unless Object.new.respond_to?(:flush)
 end
 EOF
-let g:VimuxOrientation = "h"
+let g:VimuxOrientation = "v"
 " }
 
 " Testing & Linting

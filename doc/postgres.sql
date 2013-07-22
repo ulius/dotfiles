@@ -19,3 +19,10 @@ CREATE GROUP webreaders;
 GRANT SELECT ON pages TO webreaders;
 GRANT INSERT ON viewlog TO webreaders;
 GRANT webreaders TO tim, bob;
+
+-- kill all connections to particular database (9.2)
+select pg_terminate_backend(pid)
+from pg_stat_activity
+where pid <> pg_backend_pid()
+and datname = 'eslschoolsreviews_dev';
+
