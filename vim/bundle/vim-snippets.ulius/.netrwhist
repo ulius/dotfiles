@@ -1,7 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/var/www/html/neatevent/spec/controllers'
 let g:netrw_dirhist_2='/var/www/html/neatevent/doc'
 let g:netrw_dirhist_3='/var/www/html/neatevent'
 let g:netrw_dirhist_4='/var/www/html/work/eslschoolsreviews/db/geodata'
 let g:netrw_dirhist_5='/var/www/html/work/eslschoolsreviews/.git'
+let g:netrw_dirhist_6='/tmp/ruby-build.20130725105621.15462'
+let g:netrw_dirhist_7='/etc/sensu'

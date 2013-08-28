@@ -54,9 +54,9 @@ snippet clos
 
 	})();
 # function
-snippet func
-	function() {
-		${1:Name}
+snippet f
+	function ${1:name}(${2:params}) {
+		${3:stuff}
 	}
 # angular ctrl
 snippet ctrl
@@ -68,3 +68,11 @@ snippet sf
 		${3:stuff}
 	};
 
+# console.log
+snippet cl
+	console.log(${1:log});
+# prototype
+snippet proto
+	${1:Class}.prototype.${2:method} = function(${3:params}) {
+		${4:this.}
+	}

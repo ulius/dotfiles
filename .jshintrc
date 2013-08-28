@@ -1,0 +1,10 @@
+{
+  "globalstrict": true,
+  "globals": {
+    "$": false,
+    "jQuery": false,
+    "_": false,
+    "angular": false,
+    "console": false
+  }
+}

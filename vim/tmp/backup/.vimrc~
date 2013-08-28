@@ -35,6 +35,7 @@ Bundle 'benmills/vimux'
 Bundle 'pgr0ss/vimux-ruby-test'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'majutsushi/tagbar'
 
 " }"}
 " Basic setup ------------------------------------------------------------------ {
@@ -76,6 +77,8 @@ imap kj <ESC>
 map <leader>1 :w <CR> 
 map <leader>3 :wq <CR>
 map <leader>% :q! <CR>
+
+map <leader>N :set nu!
 
 set foldmethod=manual
 
@@ -367,7 +370,7 @@ endfunction
 
 " }
 " Tagbar ----------------------------------------------------------------------- {
-" nnoremap <silent> <F9> :TagbarToggle<CR> 
+nnoremap <silent> <F9> :TagbarToggle<CR> 
 "}
 " Taskpaper -------------------------------------------------------------------- {
 map <F2> :sp ~/dotfiles/vim/.tasks.taskpaper<cr>

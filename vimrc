@@ -78,6 +78,8 @@ map <leader>1 :w <CR>
 map <leader>3 :wq <CR>
 map <leader>% :q! <CR>
 
+map <leader>N :set nu! <CR>
+
 set foldmethod=manual
 
 set history=10000
@@ -368,7 +370,7 @@ endfunction
 
 " }
 " Tagbar ----------------------------------------------------------------------- {
-" nnoremap <silent> <F9> :TagbarToggle<CR> 
+nnoremap <silent> <F9> :TagbarToggle<CR> 
 "}
 " Taskpaper -------------------------------------------------------------------- {
 map <F2> :sp ~/dotfiles/vim/.tasks.taskpaper<cr>
